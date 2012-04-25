@@ -1,0 +1,68 @@
+*{
+  margin: 0; 
+  padding: 0;
+}
+
+body{
+    background-color: black;
+}
+
+#infos{
+    float: left;
+    padding-left: 5px;
+    color: white;
+}
+
+#viewport{
+    width: 2000px;
+    height: 2000px;
+    position: relative;
+}
+
+#header{
+    width: 1022px;
+    text-align: right;
+    margin: 5px auto;
+    overflow: auto;
+}
+
+#map{
+    width: 1022px;
+    height: 500px;
+    border: 1px solid #333333;
+    margin: 5px auto;
+    overflow: auto;
+}
+
+#menu{
+    width: 1022px;
+    height: 200px;
+    border: 1px solid #333333;
+    overflow: hidden;
+    margin: 5px auto;
+}
+
+.selected{
+    border: 1px solid green;
+}
+
+#buttons{
+    float: right;
+    width: 264px;
+    height: 201px;
+}
+
+#buttons div{
+    width: 62px;
+    height: 62px;
+    border: 1px solid #333333;
+    background-color: #111111;
+    float: left;
+    margin-top: 2px;
+    margin-right: 2px;
+}
+
+#buttons div:hover{
+    background-color: #222222;
+    cursor: pointer;
+}
