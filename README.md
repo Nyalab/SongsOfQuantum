@@ -1,4 +1,4 @@
 jSpaceRuler
 ===========
 
-Curently under early development.
+Currently under early development.
