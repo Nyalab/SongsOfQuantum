@@ -1,7 +1,10 @@
 jSpaceRuler
 ===========
 
-Currently under early development.
+jSpaceRuler is a Strategy Game Web Engine. We aim to implement every core concept of a real time strategy game: 
+mouse picking, building, harvesting, attacking, control groups and such.
+
+The project is currently under early development.
 
 What to do?
 -----------
@@ -26,5 +29,7 @@ What to do?
 - Rally points
   - To implement 
 - Control groups
+  - To implement
+- Collisions & Pathfinding
   - To implement
 
