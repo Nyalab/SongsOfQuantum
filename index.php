@@ -67,7 +67,8 @@
         <div id="menu">
 
             <div id="infos">
-                <h1>Hive</h1>
+                <h1 id="unit_title"></h1>
+                <h2 id="unit_life"></h2>
             </div>
 
             <div id="buttons">

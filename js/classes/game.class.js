@@ -89,7 +89,8 @@ var Game = Class.extend({
             switch (e.which) {
                 case 1:
                     if($(this).hasClass('controllable')){
-                        GameGlobals.shipManager.pick($(this).data('drawable'));      
+                        GameGlobals.shipManager.pick($(this).data('drawable'));     
+                        GameGlobals.gui.menu.applySelection($('.selected'));
                     }
                     
                     break;

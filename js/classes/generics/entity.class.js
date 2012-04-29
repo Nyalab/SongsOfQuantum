@@ -3,8 +3,17 @@ var Entity = Movable.extend({
         this.id = id;
         this.refreshSprite();
         this.life = life;
+        this.maximumLife = life;
         this.orderList = [];
         this._super(id, angle, x, y, image);
+    },
+    
+    getLife: function(){
+        return this.life;
+    },
+    
+    getMaximumLife: function(){
+        return this.maximumLife;
     },
     
     getSide: function(){

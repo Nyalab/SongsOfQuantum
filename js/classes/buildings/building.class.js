@@ -6,6 +6,10 @@ var Building = Entity.extend({
         this.flag('building');
     },
     
+    getName: function(){
+        return this.properties.name;
+    },
+    
     processBuild: function (ship, cost, duration){
        if(this.getSide().hasEnoughtMinerals(-cost)){
            this.getSide().changeMinerals(-cost);

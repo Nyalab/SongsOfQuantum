@@ -8,6 +8,10 @@ var Ship = Entity.extend({
         this.flag('ship');
     },
     
+   getName: function(){
+       return this.properties.name;
+   },
+    
    findNearest: function(selector){
        var _this = this;
        var selected = null;

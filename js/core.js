@@ -32,6 +32,7 @@ var GameGlobals = {
 $(document).ready(function(){
     
     $("#map").scrollbars();
+    $('.scrollcontent').disableSelection();
     
     var game = new Game();
     
