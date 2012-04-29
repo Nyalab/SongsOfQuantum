@@ -5,6 +5,7 @@ var VrenrNest = Building.extend({
             name: "Nest",
             life: 650,
             image: 'images/vrenr/commandcenter.png',
+            productionType: 'queue',
             actions:{
                 BUILD_MINER: this.processBuildMiner,
                 BUILD_HIVE: this.processBuildHive

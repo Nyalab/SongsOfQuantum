@@ -69,6 +69,9 @@
             <div id="infos">
                 <h1 id="unit_title"></h1>
                 <h2 id="unit_life"></h2>
+                
+                <div id="queue_production"></div>
+                
             </div>
 
             <div id="buttons">

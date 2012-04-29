@@ -16,9 +16,19 @@ var Menu = Class.extend({
         $('#unit_title').html(title);
     },
     
+    setProductionDisplay: function(productionType){
+        if(productionType == "queue"){
+            $('#queue_production').html('Build list:');
+        }
+        else{
+            $('#queue_production').html('');
+        }
+    },
+    
     clear: function(){
         this.setUnitTitle('');
         this.setUnitLife(false);
+        this.setProductionDisplay(null);
         for(var i=1; i < 13; i++){
             $('#menu_slot_' + (i < 10 ? '0': '') + i).html('');
         }
@@ -31,6 +41,9 @@ var Menu = Class.extend({
             var unit = this.selection.eq(i).data('drawable');
             this.setUnitTitle(unit.properties.name);
             this.setUnitLife(unit.getLife(), unit.getMaximumLife());
+            if(unit instanceof Building){
+                this.setProductionDisplay(unit.properties.productionType);
+            }
             if(typeof(unit.menu) != 'undefined'){
                 this.apply(unit.menu);
                 return;
