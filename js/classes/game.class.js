@@ -17,7 +17,7 @@ var Game = Class.extend({
 
         side1.changeMinerals(50);
         
-        
+        /*
         for(var i=1; i < 5; i++){
             var ship = new VrenrHive("ship_" + i, i*100, i*100);
             ship.draw(GameGlobals.viewport);
@@ -32,7 +32,7 @@ var Game = Class.extend({
             
             GameGlobals.shipManager.register(ship);
         }
-        
+        */
         
         var i;
         
