@@ -1,23 +1,43 @@
 var Menu = Class.extend({
     __construct: function(){
         this.selection = null;
+        this.current = null;
+        
+        var __this = this;
+        
+        $(document).ready(function(){
+            $('#menu').bind('jSpaceRuler:life-update', function(){__this.updateUnitLife()});
+            $('#menu').bind('jSpaceRuler:production-update', function(){__this.updateProductionDisplay()});
+        });
     },
     
-    setUnitLife: function(life, maximum){
-        if(life){
-            $('#unit_life').html(life + '/' + maximum + ' hp');
+    setCurrent: function(current){
+        this.current = current;
+    },
+    
+    updateUnitLife: function(){
+        if(this.current != null){
+            $('#unit_life').html(this.current.getLife() + '/' + this.current.getMaximumLife() + ' hp');
         }
         else{
             $('#unit_life').html('');
         }
     },
     
-    setUnitTitle: function(title){
-        $('#unit_title').html(title);
+    updateUnitTitle: function(){
+        if(this.current != null){
+            $('#unit_title').html(this.current.properties.name);
+        }
+        else{
+            $('#unit_title').html('');
+        }
     },
     
-    setProductionDisplay: function(productionType){
-        if(productionType == "queue"){
+    updateProductionDisplay: function(){
+        if(this.current == null){
+            $('#queue_production').html('');
+        }
+        else if(this.current.properties.productionType == "queue"){
             $('#queue_production').html('Build list:');
         }
         else{
@@ -26,9 +46,10 @@ var Menu = Class.extend({
     },
     
     clear: function(){
-        this.setUnitTitle('');
-        this.setUnitLife(false);
-        this.setProductionDisplay(null);
+        this.setCurrent(null);
+        this.updateUnitTitle();
+        this.updateUnitLife();
+        this.updateProductionDisplay();
         for(var i=1; i < 13; i++){
             $('#menu_slot_' + (i < 10 ? '0': '') + i).html('');
         }
@@ -39,10 +60,12 @@ var Menu = Class.extend({
         this.selection = selection;
         for(var i=0; i < selection.length; i++){
             var unit = this.selection.eq(i).data('drawable');
-            this.setUnitTitle(unit.properties.name);
-            this.setUnitLife(unit.getLife(), unit.getMaximumLife());
+            
+            this.setCurrent(unit);
+            this.updateUnitTitle();
+            this.updateUnitLife();
             if(unit instanceof Building){
-                this.setProductionDisplay(unit.properties.productionType);
+                this.updateProductionDisplay();
             }
             if(typeof(unit.menu) != 'undefined'){
                 this.apply(unit.menu);
