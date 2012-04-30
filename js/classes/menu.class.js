@@ -2,17 +2,21 @@ var Menu = Class.extend({
     __construct: function(){
         this.selection = null;
         this.current = null;
-        
-        var __this = this;
-        
-        $(document).ready(function(){
-            $('#menu').bind('jSpaceRuler:life-update', function(){__this.updateUnitLife()});
-            $('#menu').bind('jSpaceRuler:production-update', function(){__this.updateProductionDisplay()});
-        });
     },
     
     setCurrent: function(current){
+        if(this.current != null){
+            $(this.current.getSprite()).unbind('jSpaceRuler:life-update');
+            $(this.current.getSprite()).unbind('jSpaceRuler:production-update');
+        }
+        
         this.current = current;
+        
+        if(this.current != null){
+            var __this = this;
+            $(this.current.getSprite()).bind('jSpaceRuler:life-update', function(){__this.updateUnitLife()});
+            $(this.current.getSprite()).bind('jSpaceRuler:production-update', function(){__this.updateProductionDisplay()});
+        }
     },
     
     updateUnitLife: function(){

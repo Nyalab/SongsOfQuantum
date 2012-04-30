@@ -31,9 +31,7 @@ var Building = Entity.extend({
         this.getSide().add(miner);
         GameGlobals.shipManager.register(miner);
         
-        var event = jQuery.Event("jSpaceRuler:production-update");
-        $("#menu").trigger(event);
-        
+        this.dispatch("jSpaceRuler:production-update");
     }
 });
 

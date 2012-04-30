@@ -25,6 +25,8 @@ var Entity = Movable.extend({
         if(this.life <= 0){
             this.die();
         }
+        
+        this.dispatch("jSpaceRuler:life-update");
     },
     
     isDead: function(){

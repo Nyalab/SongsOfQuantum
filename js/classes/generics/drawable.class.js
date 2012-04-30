@@ -8,6 +8,11 @@ var Drawable = Class.extend({
         this.flags = [];
     },
     
+    dispatch: function(name){
+        var event = jQuery.Event(name);
+        $(this.getSprite()).trigger(event);
+    },
+    
     getSprite: function(){
         return $('#' + this.id);
     },
