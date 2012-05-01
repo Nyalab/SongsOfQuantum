@@ -16,12 +16,12 @@ var VrenrNest = Building.extend({
         this.menu = [
         {
             slot: '#menu_slot_01',
-            icon: 'images/vrenr/miner.png',
+            icon: 'images/vrenr/miner_menu.png',
             command: 'BUILD_MINER'
         },
         {
             slot: '#menu_slot_02',
-            icon: 'images/vrenr/hive.png',
+            icon: 'images/vrenr/hive_menu.png',
             command: 'BUILD_HIVE'
         }
         ];
@@ -32,11 +32,11 @@ var VrenrNest = Building.extend({
     },
    
     processBuildMiner: function(){
-        this.processAddBuild(VrenrMiner, 50, 3000);
+        this.processAddBuild(VrenrMiner, 50, 10000);
     },
    
     processBuildHive: function(){
-        this.processAddBuild(VrenrHive, 150, 6000);
+        this.processAddBuild(VrenrHive, 150, 30000);
     }
 });
 

@@ -46,16 +46,22 @@ var Menu = Class.extend({
             var list = "";
             for(var i in this.current.productionQueue){
                 
+                var progress = "";
                 if(i == 0){
                     var progress = ((new Date()).getTime() - this.current.productionQueue[i].startTime);
                     progress = Math.round(100 * progress / this.current.productionQueue[i].duration);
-                    list += "[" + progress + "%]";
+                    progress = progress + "%";
                 }
                 
-                list += this.current.productionQueue[i].unit.properties.name + ", "; 
+                list += "<div class=\"queue_production_item\">";
+                list += "<div>";
+                list += "<img src=\"" + this.current.productionQueue[i].unit.properties.icon + "\" />";
+                list += "</div>";
+                list += progress;
+                list += "</div>"; 
             }
             
-            $('#queue_production').html('Build list: ' + list);
+            $('#queue_production').html(list);
             
         }
         else{

@@ -9,6 +9,7 @@ var VrenrMiner = Ship.extend({
             rotationSpeed: 50,
             advanceSpeed: 1,
             image: 'images/vrenr/miner.png',
+            icon: 'images/vrenr/miner_menu.png',
             weapon: {
                 life: 20,
                 image: 'images/vrenr/weapon.png',

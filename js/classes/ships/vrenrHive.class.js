@@ -9,6 +9,7 @@ var VrenrHive = Ship.extend({
             rotationSpeed: 1,
             advanceSpeed: 0.5,
             image: 'images/vrenr/hive.png',
+            icon: 'images/vrenr/hive_menu.png',
             weapon: {
                 life: 100,
                 image: 'images/vrenr/weapon.png',
