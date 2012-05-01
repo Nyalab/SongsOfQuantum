@@ -7,6 +7,7 @@ var VrenrNest = Building.extend({
             image: 'images/vrenr/commandcenter.png',
             productionType: 'queue',
             actions:{
+                BUILD: this.processBuild,
                 BUILD_MINER: this.processBuildMiner,
                 BUILD_HIVE: this.processBuildHive
             }
@@ -31,11 +32,11 @@ var VrenrNest = Building.extend({
     },
    
     processBuildMiner: function(){
-        this.processBuild(VrenrMiner, 50, 3000);
+        this.processAddBuild(VrenrMiner, 50, 3000);
     },
    
     processBuildHive: function(){
-        this.processBuild(VrenrHive, 150, 6000);
+        this.processAddBuild(VrenrHive, 150, 6000);
     }
 });
 

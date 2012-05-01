@@ -42,7 +42,21 @@ var Menu = Class.extend({
             $('#queue_production').html('');
         }
         else if(this.current.properties.productionType == "queue"){
-            $('#queue_production').html('Build list:');
+            
+            var list = "";
+            for(var i in this.current.productionQueue){
+                
+                if(i == 0){
+                    var progress = ((new Date()).getTime() - this.current.productionQueue[i].startTime);
+                    progress = Math.round(100 * progress / this.current.productionQueue[i].duration);
+                    list += "[" + progress + "%]";
+                }
+                
+                list += this.current.productionQueue[i].unit.properties.name + ", "; 
+            }
+            
+            $('#queue_production').html('Build list: ' + list);
+            
         }
         else{
             $('#queue_production').html('');

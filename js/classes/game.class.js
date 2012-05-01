@@ -15,7 +15,7 @@ var Game = Class.extend({
 
         GameGlobals.playerSide = side1;
 
-        side1.changeMinerals(50);
+        side1.changeMinerals(500);
         
         /*
         for(var i=1; i < 5; i++){
