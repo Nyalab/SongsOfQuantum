@@ -6,14 +6,20 @@ mouse picking, building, harvesting, attacking, control groups and such.
 
 The project is currently under early development.
 
+Features
+--------
+- Moving, Attacking with units
+- Picking units by clicking them
+- Creating units from buildings
+- Mining asteroids
+- Map loading
+
 What to do?
 -----------
 
 - Menu
   - Missing tab-key switching management
   - Missing shortcuts management
-- Build units
-  - Missing unit production progress bar. 
 - Build buildings
   - To implement
 - Unit infos on map
