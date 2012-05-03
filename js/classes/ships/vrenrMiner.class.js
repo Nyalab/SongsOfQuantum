@@ -38,6 +38,14 @@ var VrenrMiner = Ship.extend({
             }
         };
        
+        this.menu = [
+          {
+              slot: '#menu_slot_01',
+              icon: 'images/vrenr/commandcenter.png',
+              command: 'BUILD_COMMAND_CENTER'
+          }
+        ];
+
        this._super(id, x, y);
        this.flag('vrenr');
    },

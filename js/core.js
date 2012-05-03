@@ -23,6 +23,7 @@ var GameGlobals = {
     shipManager: new ShipManager('.ship, .building'),
     viewport: '#viewport',
     playerSide: null,
+    mouse: new Mouse(),
     gui:{
         mineralsDisplay: '#minerals_display',
         menu: new Menu()

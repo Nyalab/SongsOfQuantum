@@ -50,8 +50,10 @@ $LAB
    // Main game class
    .script("js/classes/game.class.js")
 
-   // Mouse cursor class
+   // Mouse & cursor class
    .script("js/classes/cursor.class.js")
+   .script("js/classes/mouse.class.js")
+   .script("js/classes/mouseBehavior/mouseBehaviorDefaults.class.js")
 
    // GUI menu class
    .script("js/classes/menu.class.js")
