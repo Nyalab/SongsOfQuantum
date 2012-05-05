@@ -60,14 +60,7 @@ var MouseBehaviorDefaults = Class.extend({
 	            // middle
 	            break;
 	        case 3:
-	            if($(this).hasClass('controllable')){
-	                GameGlobals.shipManager.order(function(){
-	                    var ship = $(this).data('drawable');
-	                    ship.setOrder({
-	                        command: "BUILD_MINER"
-	                    });
-	                });
-	            }
+
 	            break;
 	        default:
 	            alert('You have a strange mouse');
@@ -90,7 +83,6 @@ var MouseBehaviorDefaults = Class.extend({
 	            var localX = e.pageX - $(GameGlobals.viewport).offset().left;
 	            var localY = e.pageY - $(GameGlobals.viewport).offset().top;
 	            
-	            console.log($(GameGlobals.viewport).offset().left);
 	            
 	            GameGlobals.shipManager.order(function(){
 	                var ship = $(this).data('drawable');

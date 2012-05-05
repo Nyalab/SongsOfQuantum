@@ -34,7 +34,9 @@ var VrenrMiner = Ship.extend({
                 MOVE: this.processMove,
                 ATTACK: this.processAttack,
                 GATHER: this.processGather,
-                DEPOSIT: this.processDeposit
+                DEPOSIT: this.processDeposit,
+                PLACE_COMMAND_CENTER: this.processPlaceCommandCenter,
+                BUILD_COMMAND_CENTER: this.processBuildCommandCenter
             }
         };
        
@@ -42,7 +44,7 @@ var VrenrMiner = Ship.extend({
           {
               slot: '#menu_slot_01',
               icon: 'images/vrenr/commandcenter.png',
-              command: 'BUILD_COMMAND_CENTER'
+              command: 'PLACE_COMMAND_CENTER'
           }
         ];
 
@@ -91,6 +93,25 @@ var VrenrMiner = Ship.extend({
                 target: this.lastAsteroid
             });
        }
+   },
+
+   processPlaceCommandCenter: function(order){
+      var options = {};
+
+      options.command = "BUILD_COMMAND_CENTER";
+      options.build = VrenrNest;
+
+      GameGlobals.mouse.setState(MouseBehaviorPlacebuilding, options);
+      this.nextOrder();
+   },
+
+   processBuildCommandCenter: function(order){
+      var nest = new VrenrNest('building_' + GameGlobals.shipManager.generateId(), order.target.elements[0], order.target.elements[1]);
+      nest.draw(GameGlobals.viewport);
+      nest.flag('controllable');
+      GameGlobals.playerSide.add(nest);
+      GameGlobals.shipManager.register(nest);
+      this.nextOrder();
    }
    
 });
