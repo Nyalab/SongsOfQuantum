@@ -28,7 +28,10 @@ var MouseBehaviorPlacebuilding = Class.extend({
 	                ship.setOrder({
 	                    command: options.command,
 	                    build: options.build,
-	                    target: Vector.create([localX, localY])
+	                    target: Vector.create([localX, localY]),
+	                    onCancel: function(){
+	                    	GameGlobals.playerSide.changeMinerals(options.cost);
+	                    }
 	                });
 	            });
 
@@ -37,7 +40,9 @@ var MouseBehaviorPlacebuilding = Class.extend({
 	        case 2:
 	            // middle
 	            break;
-	        case 3: // right click, cancels the build
+	        case 3: 
+	        	var options = GameGlobals.mouse.currentState.options;
+	        	GameGlobals.playerSide.changeMinerals(options.cost);
 	            GameGlobals.mouse.setState(MouseBehaviorDefaults , null);
 	            break;
 	        default:

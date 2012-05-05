@@ -27,6 +27,9 @@ var VrenrMiner = Ship.extend({
                 lastAsteroid: null,
                 depositPoint: null
             },
+            building: {
+              range: 30
+            },
             deposit:{
                 range: 30
             },
@@ -96,22 +99,32 @@ var VrenrMiner = Ship.extend({
    },
 
    processPlaceCommandCenter: function(order){
-      var options = {};
+      if(this.getSide().hasEnoughtMinerals(-300)){
+        this.getSide().changeMinerals(-300);
+        var options = {};
 
-      options.command = "BUILD_COMMAND_CENTER";
-      options.build = VrenrNest;
-
-      GameGlobals.mouse.setState(MouseBehaviorPlacebuilding, options);
-      this.nextOrder();
+        options.command = "BUILD_COMMAND_CENTER";
+        options.build = VrenrNest;
+        options.cost = 300;
+        
+        GameGlobals.mouse.setState(MouseBehaviorPlacebuilding, options);
+        this.nextOrder();
+      }
    },
 
    processBuildCommandCenter: function(order){
-      var nest = new VrenrNest('building_' + GameGlobals.shipManager.generateId(), order.target.elements[0], order.target.elements[1]);
-      nest.draw(GameGlobals.viewport);
-      nest.flag('controllable');
-      GameGlobals.playerSide.add(nest);
-      GameGlobals.shipManager.register(nest);
-      this.nextOrder();
+      if(order.target.distanceFrom(this.getPosition()) > this.properties.building.range){
+        this.setTarget(order.target);
+        this.computeMove();
+      }
+      else{
+        var nest = new VrenrNest('building_' + GameGlobals.shipManager.generateId(), order.target.elements[0], order.target.elements[1]);
+        nest.draw(GameGlobals.viewport);
+        nest.flag('controllable');
+        GameGlobals.playerSide.add(nest);
+        GameGlobals.shipManager.register(nest);
+        this.nextOrder();
+      }
    }
    
 });

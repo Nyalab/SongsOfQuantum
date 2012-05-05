@@ -39,6 +39,11 @@ var Entity = Movable.extend({
     },
     
     setOrder: function(order){
+        for(var i in this.orderList){
+            if(typeof(this.orderList[i].onCancel) != 'undefined'){
+                this.orderList[i].onCancel();
+            }
+        }
         this.orderList = [];
         this.addOrder(order);
     },
