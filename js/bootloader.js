@@ -31,6 +31,7 @@ $LAB
 
    // Ships classes
    .script("js/classes/ships/ship.class.js")
+   .script("js/classes/ships/vrenrShip.class.js")
    .script("js/classes/ships/vrenrHive.class.js")
    .script("js/classes/ships/vrenrMiner.class.js")
    .script("js/classes/ships/shipManager.class.js")

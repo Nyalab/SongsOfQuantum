@@ -26,9 +26,10 @@ var MouseBehaviorPlacebuilding = Class.extend({
 				GameGlobals.shipManager.order(function(){
 	                var ship = $(this).data('drawable');
 	                ship.setOrder({
-	                    command: options.command,
+	                    command: "BUILD",
 	                    build: options.build,
 	                    target: Vector.create([localX, localY]),
+	                    duration: options.duration,
 	                    onCancel: function(){
 	                    	GameGlobals.playerSide.changeMinerals(options.cost);
 	                    }
