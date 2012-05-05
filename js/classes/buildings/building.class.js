@@ -16,7 +16,23 @@ var Building = Entity.extend({
         this.productionQueue = [];
         this.isBuilding = false;
     },
-    
+
+    disable: function(){
+      if(this.getSprite().hasClass('controllable')){
+        this.getSprite().removeClass('controllable');
+        this.getSprite().addClass('controllable-disabled');
+      }
+      this.getSprite().css('opacity', '0.1');
+    },
+
+    enable: function(){
+      if(this.getSprite().hasClass('controllable-disabled')){
+        this.getSprite().removeClass('controllable-disabled');
+        this.getSprite().addClass('controllable');
+      }
+      this.getSprite().css('opacity', '1');
+    },
+
     getName: function(){
         return this.properties.name;
     },

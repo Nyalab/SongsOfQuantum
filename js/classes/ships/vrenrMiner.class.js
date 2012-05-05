@@ -106,7 +106,7 @@ var VrenrMiner = Ship.extend({
         options.command = "BUILD_COMMAND_CENTER";
         options.build = VrenrNest;
         options.cost = 300;
-        
+
         GameGlobals.mouse.setState(MouseBehaviorPlacebuilding, options);
         this.nextOrder();
       }
@@ -121,8 +121,13 @@ var VrenrMiner = Ship.extend({
         var nest = new VrenrNest('building_' + GameGlobals.shipManager.generateId(), order.target.elements[0], order.target.elements[1]);
         nest.draw(GameGlobals.viewport);
         nest.flag('controllable');
+        nest.disable();
         GameGlobals.playerSide.add(nest);
         GameGlobals.shipManager.register(nest);
+        setTimeout(function(){
+          console.log('COMPLETE!');
+          nest.enable();
+        }, 10000);
         this.nextOrder();
       }
    }
