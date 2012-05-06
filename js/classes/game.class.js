@@ -48,8 +48,8 @@ var Game = Class.extend({
             side1.add(nest);
             GameGlobals.shipManager.register(nest);
             
-            for(var j=0; j < Map.spawns[i].miners; j++){
-                var miner = new VrenrMiner('ship_' + j, Map.spawns[i].x + j*20, Map.spawns[i].y + j*20);
+            for(var j=0; j < Map.spawns[i].miners.length; j++){
+                var miner = new VrenrMiner('ship_' + j, Map.spawns[i].miners[j].x, Map.spawns[i].miners[j].y);
                 miner.flag('controllable');
                 miner.draw(GameGlobals.viewport);
                 side1.add(miner);
