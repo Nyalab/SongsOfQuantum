@@ -38,9 +38,8 @@ var Building = Entity.extend({
         return this.properties.name;
     },
     
-    processRallyOrder: function(order){
-      this.rallyOrder = order.rallyOrder;
-      this.nextOrder();
+    setRallyOrder: function(order){
+      this.rallyOrder = order;
     },
 
     /*
@@ -106,7 +105,7 @@ var Building = Entity.extend({
         var unit = new ship('ship_' + id, this.x, this.y + 50);
 
         if(this.rallyOrder != null){
-          unit.order(this.rallyOrder);
+          unit.setOrder(this.rallyOrder);
         }
 
         unit.flag('controllable');
