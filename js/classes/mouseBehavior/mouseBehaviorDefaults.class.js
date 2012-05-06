@@ -1,6 +1,6 @@
 var MouseBehaviorDefaults = Class.extend({
 	__construct: function(){
-
+		document.onselectstart = function() { return false; }
 	},
 
 	asteroid: function(e) {
@@ -83,6 +83,8 @@ var MouseBehaviorDefaults = Class.extend({
 	            Cursor.setNoCursor();
 	            GameGlobals.shipManager.clearSelection();
 	            GameGlobals.gui.menu.applySelection([]);
+	            // We pass the coordinates of the cursor
+				Cursor.beginSelection(e.pageX,e.pageY)
 	            break;
 	        case 2:
 	            // middle
@@ -115,5 +117,25 @@ var MouseBehaviorDefaults = Class.extend({
 	        default:
 	            alert('You have a strange mouse');
 	    }
-	}
+	},
+
+	mouseMove: function(e) {
+        Cursor.mouseX = e.pageX;
+        Cursor.mouseY = e.pageY;
+    },
+
+	releaseClick:  function(e) {
+        switch (e.which) {
+            case 1:
+                Cursor.endSelection();
+                break;
+            case 2:
+                // middle
+                break;
+            case 3:
+                break;
+            default:
+                alert('You have a strange mouse');
+        }
+    }
 });

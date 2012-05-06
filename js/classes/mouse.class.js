@@ -30,6 +30,11 @@ var Mouse = Class.extend({
 		$('body').on('mousedown', '.ship', this.currentState.ship);
 		$('body').on('mousedown', '.building', this.currentState.building);
 		$('body').on('mousedown', '#viewport', this.currentState.viewport);
+		$('body').on('mousedown', '#mouseSelection', this.currentState.viewport);
+		$('body').on('mousemove', '#viewport', this.currentState.mouseMove);
+		$('body').on('mousemove', '#mouseSelection', this.currentState.mouseMove);
+		$('body').on('mouseup', '#viewport', this.currentState.releaseClick);
+		$('body').on('mouseup', '#mouseSelection', this.currentState.releaseClick);
 	}
 
 });
