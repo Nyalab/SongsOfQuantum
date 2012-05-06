@@ -15,6 +15,7 @@ var Building = Entity.extend({
         this.flag('building');
         this.productionQueue = [];
         this.isBuilding = false;
+        this.rallyOrder = null;
     },
 
     disable: function(){
@@ -37,6 +38,11 @@ var Building = Entity.extend({
         return this.properties.name;
     },
     
+    processRallyOrder: function(order){
+      this.rallyOrder = order.rallyOrder;
+      this.nextOrder();
+    },
+
     /*
      * Adds an unit to the production queue.
      */
@@ -98,12 +104,17 @@ var Building = Entity.extend({
     endBuild: function(ship){
         var id = GameGlobals.shipManager.generateId();
         var unit = new ship('ship_' + id, this.x, this.y + 50);
+
+        if(this.rallyOrder != null){
+          unit.order(this.rallyOrder);
+        }
+
         unit.flag('controllable');
         unit.draw(GameGlobals.viewport);
         this.getSide().add(unit);
         GameGlobals.shipManager.register(unit);
         
-        this.productionQueue.splice(0,1);
+        this.productionQueue.splice(0, 1);
         this.isBuilding = false;
         this.dispatch("jSpaceRuler:production-update");
     }
