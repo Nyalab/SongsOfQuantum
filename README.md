@@ -10,8 +10,9 @@ Features
 --------
 - Moving, Attacking with units
 - Picking units by clicking them
-- Creating units from buildings
 - Mining asteroids
+- Creating units from buildings
+- Creating buildings with units
 - Map loading
 
 What to do?
@@ -20,10 +21,10 @@ What to do?
 - Menu
   - Missing tab-key switching management
   - Missing shortcuts management
-- Build buildings
-  - To implement
 - Unit infos on map
   - Life bar
+  - Building creation progress
+  - Building placeholder when placing it with the mouse
 - Maps
   - To improve
 - Mouse rectangular selection
