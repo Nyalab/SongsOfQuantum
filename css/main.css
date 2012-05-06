@@ -82,3 +82,7 @@ body{
     width: 64px;
     height: 64px;
 }
+
+#mouseSelection {
+    border: 1px dotted red;
+}

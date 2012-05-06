@@ -1,4 +1,15 @@
 var Cursor = {
+
+    selectionId: "mouseSelection",
+    selectionLoop: false, // to know if we are currently doing a selection
+    originalSelectionX: 0,
+    originalSelectionY: 0,
+    lastKnownX: 0,
+    lastKnownY: 0,
+
+    mouseX: 0,
+    mouseY: 0,
+
     init: function(){
       
         $('body').append('<img style="position:absolute;display:none;" id="cursor_move" class="cursor" src="images/cursor/move.png" />');
@@ -30,5 +41,52 @@ var Cursor = {
     setAttackCursor: function(){
         $('.cursor').hide();
         $('#cursor_attack').show();
+    },
+
+    beginSelection: function(x, y) {
+        this.originalSelectionX = x;
+        this.originalSelectionY = y;
+        this.lastKnownX = x;
+        this.lastKnownY = y;
+        $("<div/>", {
+            id: this.selectionId,
+            style: "position: absolute; top: " + this.originalSelectionY + "; left: " + this.originalSelectionX + "; " + this.selectionStyle + " width: 1px; height: 1px;"
+        }).appendTo($('body'));
+        this.selectionLoop = setInterval(this.loopSelection, 50);
+    },
+
+    endSelection: function(){
+        clearInterval(this.selectionLoop);
+        $("#" + this.selectionId).remove();
+    },
+
+    loopSelection: function() {
+        if((Cursor.lastKnownX == Cursor.mouseX) && (Cursor.lastKnownY == Cursor.mouseY))
+            return false;
+
+        var Xdiff = Cursor.mouseX - Cursor.originalSelectionX;
+        var Ydiff = Cursor.mouseY - Cursor.originalSelectionY;
+        
+        if(Xdiff > 0)
+        {
+            $("#" + Cursor.selectionId).css('width', Xdiff + "px");
+        }
+        else
+        {
+            $("#" + Cursor.selectionId).css('left', parseInt(Cursor.originalSelectionX) + parseInt(Xdiff));
+            $("#" + Cursor.selectionId).css('width', parseInt(Xdiff*-1) + "px");
+        }
+
+        if(Ydiff > 0)
+        {
+            $("#" + Cursor.selectionId).css('height', Ydiff + "px");
+        }
+        else
+        {
+            $("#" + Cursor.selectionId).css('top', parseInt(Cursor.originalSelectionY) + parseInt(Ydiff));
+            $("#" + Cursor.selectionId).css('height', parseInt(Ydiff*-1) + "px");
+        }
+        Cursor.lastKnownX = Cursor.mouseX;
+        Cursor.lastKnownY = Cursor.mouseY;
     }
 };
