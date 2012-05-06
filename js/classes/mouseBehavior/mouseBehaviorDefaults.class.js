@@ -1,6 +1,6 @@
 var MouseBehaviorDefaults = Class.extend({
 	__construct: function(){
-
+		document.onselectstart = function() { return false; }
 	},
 
 	asteroid: function(e) {
