@@ -81,6 +81,8 @@ var MouseBehaviorDefaults = Class.extend({
 	            Cursor.setNoCursor();
 	            GameGlobals.shipManager.clearSelection();
 	            GameGlobals.gui.menu.applySelection([]);
+	            // We pass the coordinates of the cursor
+				Cursor.beginSelection(e.pageX,e.pageY)
 	            break;
 	        case 2:
 	            // middle
