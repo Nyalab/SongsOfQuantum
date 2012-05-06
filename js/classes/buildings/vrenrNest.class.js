@@ -9,7 +9,8 @@ var VrenrNest = Building.extend({
             actions:{
                 BUILD: this.processBuild,
                 BUILD_MINER: this.processBuildMiner,
-                BUILD_HIVE: this.processBuildHive
+                BUILD_HIVE: this.processBuildHive,
+                RALLY_ORDER: this.processRallyOrder
             }
         };
        

@@ -9,10 +9,18 @@ var MouseBehaviorDefaults = Class.extend({
 	    
 	    GameGlobals.shipManager.order(function(){
 	        var ship = $(this).data('drawable');
-	        ship.setOrder({
-	            command: "GATHER", 
-	            target: asteroid
-	        });
+	        if($(this).hasClass('building')){
+		        ship.setRallyOrder({
+		            command: "GATHER", 
+		            target: asteroid
+		        });
+	    	}
+	    	else{
+		        ship.setOrder({
+		            command: "GATHER", 
+		            target: asteroid
+		        });
+	    	}
 	    });
 	},
 
@@ -86,10 +94,20 @@ var MouseBehaviorDefaults = Class.extend({
 	            
 	            GameGlobals.shipManager.order(function(){
 	                var ship = $(this).data('drawable');
-	                ship.setOrder({
-	                    command: "MOVE", 
-	                    target: Vector.create([localX, localY])
-	                });
+
+			        if($(this).hasClass('building')){
+				        ship.setRallyOrder({
+		                    command: "MOVE", 
+		                    target: Vector.create([localX, localY])
+				        });
+			    	}
+			    	else{
+		                ship.setOrder({
+		                    command: "MOVE", 
+		                    target: Vector.create([localX, localY])
+		                });
+			    	}
+
 	            });
 	            break;
 	        default:

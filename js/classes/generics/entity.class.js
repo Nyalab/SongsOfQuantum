@@ -45,11 +45,16 @@ var Entity = Movable.extend({
             }
         }
         this.orderList = [];
-        this.addOrder(order);
+
+        if(typeof(this.properties.actions[order.command]) != 'undefined'){
+            this.addOrder(order);
+        }
     },
     
     addOrder: function(order){
-        this.orderList.push(order);
+        if(typeof(this.properties.actions[order.command]) != 'undefined'){
+            this.orderList.push(order);
+        }
     },
     
     getCurrentOrder: function(){
@@ -59,7 +64,7 @@ var Entity = Movable.extend({
     nextOrder: function(){
         this.orderList.shift();
     },
-    
+
     process: function(){
         var order = this.getCurrentOrder();
         
@@ -71,14 +76,14 @@ var Entity = Movable.extend({
             this.properties.actions[order.command].apply(this, [order]);
         }
         else{
-            this.processUnknown();
+            this.processUnknown(order);
         }
 
   
     },
 
-    processUnknown: function(){
-        console.log('Error: unknown order.')
+    processUnknown: function(order){
+        console.log('Error: unknown order: ' + order.command)
         this.nextOrder();
     }
 });

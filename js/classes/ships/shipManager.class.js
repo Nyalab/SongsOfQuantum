@@ -62,8 +62,14 @@ var ShipManager = Class.extend({
         });
     },
 
+    // An alias of apply for giving order.
     order: function(order){
-        $('.selected').each(order);
+        this.apply(order);
+    },
+
+    
+    apply: function(func){
+        $('.selected').each(func);
     }
     
 });
