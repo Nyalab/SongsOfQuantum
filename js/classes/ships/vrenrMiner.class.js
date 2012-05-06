@@ -1,5 +1,5 @@
 
-var VrenrMiner = Ship.extend({
+var VrenrMiner = VrenrShip.extend({
    
    __construct: function(id, x, y){
        
@@ -27,6 +27,9 @@ var VrenrMiner = Ship.extend({
                 lastAsteroid: null,
                 depositPoint: null
             },
+            building: {
+              range: 30
+            },
             deposit:{
                 range: 30
             },
@@ -34,10 +37,20 @@ var VrenrMiner = Ship.extend({
                 MOVE: this.processMove,
                 ATTACK: this.processAttack,
                 GATHER: this.processGather,
-                DEPOSIT: this.processDeposit
+                DEPOSIT: this.processDeposit,
+                PLACE_COMMAND_CENTER: this.processPlaceCommandCenter,
+                BUILD: this.processBuild
             }
         };
        
+        this.menu = [
+          {
+              slot: '#menu_slot_01',
+              icon: 'images/vrenr/commandcenter.png',
+              command: 'PLACE_COMMAND_CENTER'
+          }
+        ];
+
        this._super(id, x, y);
        this.flag('vrenr');
    },
@@ -83,6 +96,10 @@ var VrenrMiner = Ship.extend({
                 target: this.lastAsteroid
             });
        }
-   }
+   },
+
+   processPlaceCommandCenter: function(){
+      this.processPlaceBuilding(VrenrNest, 300, 10000);
+   },
    
 });

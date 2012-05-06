@@ -31,6 +31,7 @@ $LAB
 
    // Ships classes
    .script("js/classes/ships/ship.class.js")
+   .script("js/classes/ships/vrenrShip.class.js")
    .script("js/classes/ships/vrenrHive.class.js")
    .script("js/classes/ships/vrenrMiner.class.js")
    .script("js/classes/ships/shipManager.class.js")
@@ -50,8 +51,11 @@ $LAB
    // Main game class
    .script("js/classes/game.class.js")
 
-   // Mouse cursor class
+   // Mouse & cursor class
    .script("js/classes/cursor.class.js")
+   .script("js/classes/mouse.class.js")
+   .script("js/classes/mouseBehavior/mouseBehaviorDefaults.class.js")
+   .script("js/classes/mouseBehavior/mouseBehaviorPlaceBuilding.class.js")
 
    // GUI menu class
    .script("js/classes/menu.class.js")
