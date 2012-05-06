@@ -42,10 +42,12 @@ var MouseBehaviorDefaults = Class.extend({
 	            if($(this).hasClass('controllable')){
 	                GameGlobals.shipManager.order(function(){
 	                    var ship = $(this).data('drawable');
-	                    ship.setOrder({
-	                        command: "ATTACK",
-	                        target: target
-	                    });
+	                    if($(this).hasClass('ship')){
+		                    ship.setOrder({
+		                        command: "ATTACK",
+		                        target: target
+		                    });
+	                	}
 	                });
 	            }
 	            break;
