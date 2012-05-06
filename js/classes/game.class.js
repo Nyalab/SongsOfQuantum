@@ -145,12 +145,14 @@ var Game = Class.extend({
         
 
         // Ship unselect or order
-        $('#viewport').mousedown(function(e) {
+        $('#viewport, #mouseSelection').live('mousedown', function(e) {
             switch (e.which) {
                 case 1:
                     Cursor.setNoCursor();
                     GameGlobals.shipManager.clearSelection();
                     GameGlobals.gui.menu.applySelection([]);
+                    // We pass the coordinates of the cursor
+                    Cursor.beginSelection(e.pageX,e.pageY);
                     break;
                 case 2:
                     // middle
@@ -170,6 +172,24 @@ var Game = Class.extend({
                             target: Vector.create([localX, localY])
                         });
                     });
+                    break;
+                default:
+                    alert('You have a strange mouse');
+            }
+        }).live('mousemove', function(e) {
+            Cursor.mouseX = e.pageX;
+            Cursor.mouseY = e.pageY;
+        });
+
+        $('#viewport, #mouseSelection').live('mouseup', function(e) {
+            switch (e.which) {
+                case 1:
+                    Cursor.endSelection();
+                    break;
+                case 2:
+                    // middle
+                    break;
+                case 3:
                     break;
                 default:
                     alert('You have a strange mouse');
