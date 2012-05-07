@@ -50,12 +50,16 @@ var Cursor = {
         this.lastKnownY = y;
         $("<div/>", {
             id: this.selectionId,
-            style: "position: absolute; top: " + this.originalSelectionY + "; left: " + this.originalSelectionX + "; " + this.selectionStyle + " width: 1px; height: 1px;"
-        }).appendTo($('body'));
+            style: "position: absolute; top: " + this.originalSelectionY + "px; left: " + this.originalSelectionX + "px; " + this.selectionStyle + " width: 1px; height: 1px;"
+        }).appendTo($('#viewport'));
         this.selectionLoop = setInterval(this.loopSelection, 50);
     },
 
     endSelection: function(){
+        var colliders_selector = "#mouseSelection";
+        var obstacles_selector = ".ship";
+        var hits = $(colliders_selector).collision(obstacles_selector);
+        console.log(hits);
         clearInterval(this.selectionLoop);
         $("#" + this.selectionId).remove();
     },
@@ -88,5 +92,7 @@ var Cursor = {
         }
         Cursor.lastKnownX = Cursor.mouseX;
         Cursor.lastKnownY = Cursor.mouseY;
+
+        $('document').disableSelection();
     }
 };

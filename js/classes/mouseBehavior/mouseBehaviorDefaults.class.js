@@ -1,6 +1,11 @@
 var MouseBehaviorDefaults = Class.extend({
-	__construct: function(){
-		document.onselectstart = function() { return false; }
+	__construct: function(){		
+        // Disable context menu
+        $(document).bind("contextmenu",function(e){
+            return false;
+        });
+        // Disable selection (blue ugly thing)
+		$('#viewport').disableSelection();
 	},
 
 	asteroid: function(e) {
@@ -126,6 +131,7 @@ var MouseBehaviorDefaults = Class.extend({
         switch (e.which) {
             case 1:
                 Cursor.endSelection();
+                e.stopPropagation();
                 break;
             case 2:
                 // middle
