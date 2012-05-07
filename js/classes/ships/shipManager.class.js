@@ -68,7 +68,7 @@ var ShipManager = Class.extend({
     },
 
     
-    apply: function(func){
+    applyToEach: function(func){
         $('.selected').each(func);
     }
     

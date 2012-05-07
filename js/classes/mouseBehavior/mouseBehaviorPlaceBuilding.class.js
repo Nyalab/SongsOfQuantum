@@ -23,7 +23,7 @@ var MouseBehaviorPlacebuilding = Class.extend({
 	            var localX = e.pageX - $(GameGlobals.viewport).offset().left;
 	            var localY = e.pageY - $(GameGlobals.viewport).offset().top;
 	            
-				GameGlobals.shipManager.order(function(){
+				GameGlobals.shipManager.applyToEach(function(){
 	                var ship = $(this).data('drawable');
 	                ship.setOrder({
 	                    command: "BUILD",
@@ -49,5 +49,14 @@ var MouseBehaviorPlacebuilding = Class.extend({
 	        default:
 	            alert('You have a strange mouse');
 	    }
-	}
+	},
+
+	mouseMove: function(e) {
+        Cursor.mouseX = e.pageX;
+        Cursor.mouseY = e.pageY;
+    },
+
+	releaseClick:  function(e) {
+
+    }
 });

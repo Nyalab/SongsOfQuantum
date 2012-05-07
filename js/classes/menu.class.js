@@ -109,7 +109,7 @@ var Menu = Class.extend({
 
             $(items[i].slot).click(function(){
                 var command = $(this).data('command');
-                GameGlobals.shipManager.order(function(){
+                GameGlobals.shipManager.applyToEach(function(){
                     var ship = $(this).data('drawable');
                     ship.setOrder({
                         command: command

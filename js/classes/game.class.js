@@ -17,23 +17,6 @@ var Game = Class.extend({
 
         side1.changeMinerals(500);
         
-        /*
-        for(var i=1; i < 5; i++){
-            var ship = new VrenrHive("ship_" + i, i*100, i*100);
-            ship.draw(GameGlobals.viewport);
-            
-            if(i%2 == 0){
-                side2.add(ship);
-            }
-            else{
-                side2.add(ship);
-                ship.flag('controllable');
-            }
-            
-            GameGlobals.shipManager.register(ship);
-        }
-        */
-        
         var i;
         
         for(i=0; i<Map.asteroids.length; i++){
