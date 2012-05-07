@@ -1,9 +1,14 @@
-jSpaceRuler
+Songs of Quantum
 ===========
 
-jSpaceRuler is a Strategy Game Web Engine. We aim to implement every core concept of a real time strategy game: 
-mouse picking, building, harvesting, attacking, control groups and such.
+Songs of Quantuum is a Web Wargame featuring the war across the stars between 3 races: the Terrestris, the Kriives and the Gamicronians.
 
+- The Terrestris are nothing else than the Humans we all know, except they're a little more advanced than us since the 24th century has come.
+- The Kriiv is an insectoid race who loves to grow quietly in asteroids belts, singing on their biological network which connects them to the Higher Consciousness level.
+- The Gamicronians are literally thinking stones as old as the universe himself, delegating tasks to their legions of automated workers from their huge space fortresses.
+
+Status
+------
 The project is currently under early development.
 
 Features
@@ -15,9 +20,12 @@ Features
 - Creating buildings with units
 - Map loading
 
-What to do?
------------
+What's next?
+------------
 
+- Make it beautifull!
+ - http://www.colourlovers.com/palette/1392487/Grunge_Side
+ - http://www.colourlovers.com/palette/2162859/Spring_Salad.
 - Menu
   - Missing tab-key switching management
   - Missing shortcuts management
