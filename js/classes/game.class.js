@@ -5,10 +5,6 @@ var Game = Class.extend({
     },
 
     start: function(){
-        // Disable context menu
-        $(document).bind("contextmenu",function(e){
-            return false;
-        });
 
         var side1 = new Side('player1', '#005500');
         var side2 = new Side('player2', '#550000');

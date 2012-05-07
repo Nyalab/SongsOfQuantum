@@ -1,10 +1,13 @@
+<!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="content-type" content="text/html; charset=utf-8" />
 
+        <link rel="stylesheet" type="text/css" href="css/tools.css" />
         <link rel="stylesheet" type="text/css" href="css/main.css" />
         <link rel="stylesheet" type="text/css" href="css/scrollbars.css" />
         <link rel="stylesheet" type="text/css" href="css/scrollbars-black.css" />
+
         <script type="text/javascript" src="js/lib/LAB.min.js"></script>
         <script type="text/javascript" src="js/bootloader.js"></script>
     </head>
@@ -12,25 +15,20 @@
     <body>
 
         <div id="header">
-            <div style="color: white">
+            <div>
                 <img src="images/asteroids_icon.png" />
                 <span id="minerals_display"></span>
+            </div>
+            <div class="real-menu">
+                Menu / Pause
             </div>
         </div>
 
         <div id="map">
             <div id="viewport"></div>
         </div>
+
         <div id="menu">
-
-            <div id="infos">
-                <h1 id="unit_title"></h1>
-                <h2 id="unit_life"></h2>
-                
-                <div id="queue_production"></div>
-                
-            </div>
-
             <div id="buttons">
                 <div id="menu_slot_01"></div>
                 <div id="menu_slot_02"></div>
@@ -47,6 +45,22 @@
                 <div id="menu_slot_11"></div>
                 <div id="menu_slot_12"></div>
             </div>
+
+            <div class="minimap">
+                
+            </div>
+
+            <div id="infos">
+                <h1 id="unit_title"></h1>
+                <h2 id="unit_life"></h2>                
+                <div id="queue_production"></div>                
+            </div>
+
+            <div class="dock">
+                aaa
+            </div>
+
+            
         </div>
     </body>
 </html>
