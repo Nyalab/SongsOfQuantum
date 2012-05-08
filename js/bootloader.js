@@ -1,6 +1,7 @@
 $LAB
    // OOP engine
    .script("js/lib/class.js")
+   .script("js/classes/utils/guid.class.js")
 
    // Paintbrush image processing library
    .script("js/lib/paintbrush.common.js")

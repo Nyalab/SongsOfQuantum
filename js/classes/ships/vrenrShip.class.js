@@ -27,7 +27,7 @@ var VrenrShip = Ship.extend({
         this.computeMove();
       }
       else{
-        var nest = new build('building_' + GameGlobals.shipManager.generateId(), position.elements[0], position.elements[1]);
+        var nest = new build('building_' + Guid.generate(), position.elements[0], position.elements[1]);
         nest.draw(GameGlobals.viewport);
         nest.flag('controllable');
         nest.disable();

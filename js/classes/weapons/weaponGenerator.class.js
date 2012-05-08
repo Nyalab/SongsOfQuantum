@@ -13,7 +13,7 @@ var WeaponGenerator = Class.extend({
     
     fire: function(target){
         if(this.cooldown < 0){    
-            var id = GameGlobals.weaponManager.generateId();
+            var id = Guid.generate();
             var weapon = new Weapon(id, this.ship.angle, this.ship.x, this.ship.y, this.ship.properties.weapon);
             weapon.draw(GameGlobals.viewport);
             weapon.setTrackedTarget(target);

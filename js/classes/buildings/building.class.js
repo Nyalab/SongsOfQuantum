@@ -101,7 +101,7 @@ var Building = Entity.extend({
      * Handles the end of production of an unit.
      */
     endBuild: function(ship){
-        var id = GameGlobals.shipManager.generateId();
+        var id = Guid.generate();
         var unit = new ship('ship_' + id, this.x, this.y + 50);
 
         if(this.rallyOrder != null){
