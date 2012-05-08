@@ -15,7 +15,14 @@ var Mouse = Class.extend({
 		$('body').off('mousedown', '.asteroid', this.currentState.asteroid);
 		$('body').off('mousedown', '.ship', this.currentState.ship);
 		$('body').off('mousedown', '.building', this.currentState.building);
+
 		$('body').off('mousedown', '#viewport');
+        $('body').off('mousemove', '#viewport');
+        $('body').off('mouseup', '#viewport');
+
+        $('body').off('mousedown', '#mouseSelection');
+        $('body').off('mousemove', '#mouseSelection');
+        $('body').off('mouseup', '#mouseSelection');
 	},
 
 	setState: function(MouseBehaviorClass, options){
@@ -37,15 +44,19 @@ var Mouse = Class.extend({
 		$('body').on('mousedown', '.asteroid', this.currentState.asteroid);
 		$('body').on('mousedown', '.ship', this.currentState.ship);
 		$('body').on('mousedown', '.building', this.currentState.building);
-		$('body').on('mousedown', '#viewport', this.currentState.viewport);
-		$('body').on('mousedown', '#mouseSelection', this.currentState.viewport);
-		$('body').on('mousemove', '#viewport', this.currentState.mouseMove);
-		$('body').on('mousemove', '#mouseSelection', this.currentState.mouseMove);
+
+        $('body').on('mousedown', '#viewport', this.currentState.viewport);
+        $('body').on('mousemove', '#viewport', this.currentState.mouseMove);
 		$('body').on('mouseup', '#viewport', this.currentState.releaseClick);
+
+        $('body').on('mousedown', '#mouseSelection', this.currentState.viewport);
+        $('body').on('mousemove', '#mouseSelection', this.currentState.mouseMove);
 		$('body').on('mouseup', '#mouseSelection', this.currentState.releaseClick);
+
 	},
 
 	beginSelection: function(x, y) {
+
 		// Store coordinates
         this.originalSelectionX = this.lastKnownX = x;
         this.originalSelectionY = this.lastKnownY = y;
@@ -56,7 +67,7 @@ var Mouse = Class.extend({
     },
 
     loopSelection: function() {
-        if((GameGlobals.mouse.lastKnownX == GameGlobals.mouse.mouseX) && (GameGlobals.mouse.lastKnownY == GameGlobals.mouse.mouseY))
+        if((GameGlobals.mouse.lastKnownX == GameGlobals.cursor.mouseX) && (GameGlobals.mouse.lastKnownY == GameGlobals.cursor.mouseY))
             return false;
 
         var Xdiff = GameGlobals.cursor.mouseX - GameGlobals.mouse.originalSelectionX;
@@ -91,10 +102,13 @@ var Mouse = Class.extend({
     },
 
     endSelection: function(){
-        var colliders_selector = "#mouseSelection";
-        var obstacles_selector = ".ship";
-        var hits = $(colliders_selector).collision(obstacles_selector);
+
         clearInterval(this.selectionLoop);
+
+        this.originalSelectionX = 0;
+        this.originalSelectionY = 0;
+        this.lastKnownX = 0;
+        this.lastKnownY = 0;
 
         GameGlobals.cursor.eraseSelection();
     }
