@@ -1,10 +1,10 @@
-var VrenrNest = Building.extend({
+var KriivNest = Building.extend({
     __construct: function(id, x, y){
        
         this.properties = {
             name: "Nest",
             life: 650,
-            image: 'images/vrenr/commandcenter.png',
+            image: 'images/kriiv/commandcenter.png',
             productionType: 'queue',
             actions:{
                 BUILD: this.processBuild,
@@ -17,27 +17,27 @@ var VrenrNest = Building.extend({
         this.menu = [
         {
             slot: '#menu_slot_01',
-            icon: 'images/vrenr/miner_menu.png',
+            icon: 'images/kriiv/miner_menu.png',
             command: 'BUILD_MINER'
         },
         {
             slot: '#menu_slot_02',
-            icon: 'images/vrenr/hive_menu.png',
+            icon: 'images/kriiv/hive_menu.png',
             command: 'BUILD_HIVE'
         }
         ];
        
         this._super(id, x, y);
-        this.flag('vrenr');
+        this.flag('kriiv');
         this.flag('mainbuilding');
     },
    
     processBuildMiner: function(){
-        this.processAddBuild(VrenrMiner, 50, 10000);
+        this.processAddBuild(KriivMiner, 50, 10000);
     },
    
     processBuildHive: function(){
-        this.processAddBuild(VrenrHive, 150, 30000);
+        this.processAddBuild(KriivHive, 150, 30000);
     }
 });
 

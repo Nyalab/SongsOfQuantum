@@ -1,5 +1,5 @@
 
-var VrenrHive = Ship.extend({
+var KriivHive = Ship.extend({
    
    __construct: function(id, x, y){
        
@@ -8,11 +8,11 @@ var VrenrHive = Ship.extend({
             life: 60,
             rotationSpeed: 1,
             advanceSpeed: 0.5,
-            image: 'images/vrenr/hive.png',
-            icon: 'images/vrenr/hive_menu.png',
+            image: 'images/kriiv/hive.png',
+            icon: 'images/kriiv/hive_menu.png',
             weapon: {
                 life: 100,
-                image: 'images/vrenr/weapon.png',
+                image: 'images/kriiv/weapon.png',
                 advanceSpeed: 3,
                 rotationSpeed: 10,
                 range: 200,
@@ -26,7 +26,7 @@ var VrenrHive = Ship.extend({
         };
        
        this._super(id, x, y);
-       this.flag('vrenr');
+       this.flag('kriiv');
    }
    
 });

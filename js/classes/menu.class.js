@@ -1,4 +1,7 @@
 var Menu = Class.extend({
+
+    /* TODO - Clearing menu if selected entity dies. */
+
     __construct: function(){
         this.selection = null;
         this.current = null;
@@ -21,25 +24,25 @@ var Menu = Class.extend({
     
     updateUnitLife: function(){
         if(this.current != null){
-            $('#unit_life').html(this.current.getLife() + '/' + this.current.getMaximumLife() + ' hp');
+            $(GameGlobals.gui.unitLife).html(this.current.getLife() + '/' + this.current.getMaximumLife() + ' hp');
         }
         else{
-            $('#unit_life').html('');
+            $(GameGlobals.gui.unitLife).html('');
         }
     },
     
     updateUnitTitle: function(){
         if(this.current != null){
-            $('#unit_title').html(this.current.properties.name);
+            $(GameGlobals.gui.unitTitle).html(this.current.properties.name);
         }
         else{
-            $('#unit_title').html('');
+            $(GameGlobals.gui.unitTitle).html('');
         }
     },
     
     updateProductionDisplay: function(){
         if(this.current == null){
-            $('#queue_production').html('');
+            $(GameGlobals.gui.unitProductionQueue).html('');
         }
         else if(this.current.properties.productionType == "queue"){
             
@@ -61,11 +64,11 @@ var Menu = Class.extend({
                 list += "</div>"; 
             }
             
-            $('#queue_production').html(list);
+            $(GameGlobals.gui.unitProductionQueue).html(list);
             
         }
         else{
-            $('#queue_production').html('');
+            $(GameGlobals.gui.unitProductionQueue).html('');
         }
     },
     
@@ -75,7 +78,7 @@ var Menu = Class.extend({
         this.updateUnitLife();
         this.updateProductionDisplay();
         for(var i=1; i < 13; i++){
-            $('#menu_slot_' + (i < 10 ? '0': '') + i).html('');
+            $(GameGlobals.gui.unitMenuSlot.replace('{id}', (i < 10 ? '0': '') + i)).html('');
         }
     },
     
@@ -109,7 +112,7 @@ var Menu = Class.extend({
 
             $(items[i].slot).click(function(){
                 var command = $(this).data('command');
-                GameGlobals.shipManager.order(function(){
+                GameGlobals.shipManager.applyToEach(function(){
                     var ship = $(this).data('drawable');
                     ship.setOrder({
                         command: command

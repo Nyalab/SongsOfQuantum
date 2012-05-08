@@ -1,5 +1,5 @@
 
-var VrenrMiner = VrenrShip.extend({
+var KriivMiner = KriivShip.extend({
    
    __construct: function(id, x, y){
        
@@ -8,11 +8,11 @@ var VrenrMiner = VrenrShip.extend({
             life: 15,
             rotationSpeed: 50,
             advanceSpeed: 1,
-            image: 'images/vrenr/miner.png',
-            icon: 'images/vrenr/miner_menu.png',
+            image: 'images/kriiv/miner.png',
+            icon: 'images/kriiv/miner_menu.png',
             weapon: {
                 life: 20,
-                image: 'images/vrenr/weapon.png',
+                image: 'images/kriiv/weapon.png',
                 advanceSpeed: 1,
                 rotationSpeed: 2,
                 range: 20,
@@ -46,20 +46,21 @@ var VrenrMiner = VrenrShip.extend({
         this.menu = [
           {
               slot: '#menu_slot_01',
-              icon: 'images/vrenr/commandcenter.png',
+              icon: 'images/kriiv/commandcenter.png',
               command: 'PLACE_COMMAND_CENTER'
           }
         ];
 
        this._super(id, x, y);
-       this.flag('vrenr');
+       this.flag('kriiv');
    },
    
    findNearestDepositPoint: function(){
-       this.depositPoint = this.findNearest('.vrenr.mainbuilding.' + this.getSide().name);
+       this.depositPoint = this.findNearest('.kriiv.mainbuilding.' + this.getSide().name);
    },
    
    processGather: function(order){
+       //TODO - Not changing of asteroid when going to it if this one disappears.
        this.lastAsteroid = order.target;
        if(order.target.getPosition().distanceFrom(this.getPosition()) > this.properties.mining.range){
            this.setTarget(order.target.getPosition());
@@ -69,8 +70,9 @@ var VrenrMiner = VrenrShip.extend({
            this.properties.mining.current++;
        }
        else{
-           this.setSprite('images/vrenr/miner_full.png');
+           this.setSprite('images/kriiv/miner_full.png');
            this.properties.mining.current = 0;
+           this.lastAsteroid.inflictDamages(this.properties.mining.capacity);
            this.findNearestDepositPoint();
             this.setOrder({
                 command: "DEPOSIT", 
@@ -85,21 +87,26 @@ var VrenrMiner = VrenrShip.extend({
            this.computeMove();
        }
        else{
-            this.setSprite('images/vrenr/miner.png');
-            this.getSide().changeMinerals(this.properties.mining.capacity);
-            if(this.lastAsteroid == null){
-                this.lastAsteroid = this.findNearest('.asteroid');
-            }
-           
+          this.setSprite('images/kriiv/miner.png');
+          this.getSide().changeMinerals(this.properties.mining.capacity);
+          if(this.lastAsteroid == null || this.lastAsteroid.isDead()){
+              this.lastAsteroid = this.findNearest('.asteroid');
+          }
+          
+          if(this.lastAsteroid != null){
             this.setOrder({
                 command: "GATHER", 
                 target: this.lastAsteroid
             });
+          }
+          else{
+            this.nextOrder();
+          }
        }
    },
 
    processPlaceCommandCenter: function(){
-      this.processPlaceBuilding(VrenrNest, 300, 10000);
+      this.processPlaceBuilding(KriivNest, 300, 10000);
    },
    
 });

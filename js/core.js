@@ -1,23 +1,3 @@
-/*
- * TODO:
- * 
- * - Menu # (manque tab, shortcuts)
- * - Production ### (manque affichage progression)
- * - Construction
- * - Barres de vie
- * - Maps #
- * - Selection souris encadrée
- * - Comportement de tir à vue
- * - Rally points
- * 
- * - Groupes de controle
- * - IA ?
- * - Réseau?
- * - Animation?
- * - Son?
- */
-
-
 var GameGlobals = {
     weaponManager: new WeaponManager(),
     shipManager: new ShipManager('.ship, .building'),
@@ -26,9 +6,16 @@ var GameGlobals = {
     mouse: new Mouse(),
     gui:{
         mineralsDisplay: '#minerals_display',
+        
+        unitLife: '#unit_life',
+        unitTitle: '#unit_title',
+        unitProductionQueue: '#queue_production',
+
+        unitMenuSlot: '#menu_slot_{id}',
+
         menu: new Menu()
     }
-}
+};
 
 $(document).ready(function(){
     

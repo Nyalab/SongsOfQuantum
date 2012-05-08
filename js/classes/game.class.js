@@ -6,29 +6,12 @@ var Game = Class.extend({
 
     start: function(){
 
-        var side1 = new Side('player1', '#005500');
+        var side1 = new Side('player1', '#8B8D28');
         var side2 = new Side('player2', '#550000');
 
         GameGlobals.playerSide = side1;
 
         side1.changeMinerals(500);
-        
-        /*
-        for(var i=1; i < 5; i++){
-            var ship = new VrenrHive("ship_" + i, i*100, i*100);
-            ship.draw(GameGlobals.viewport);
-            
-            if(i%2 == 0){
-                side2.add(ship);
-            }
-            else{
-                side2.add(ship);
-                ship.flag('controllable');
-            }
-            
-            GameGlobals.shipManager.register(ship);
-        }
-        */
         
         var i;
         
@@ -38,14 +21,14 @@ var Game = Class.extend({
         }
         
         for(i=0; i<Map.spawns.length; i++){
-            var nest = new VrenrNest('building_' + i, Map.spawns[i].x, Map.spawns[i].y);
+            var nest = new KriivNest('building_' + i, Map.spawns[i].x, Map.spawns[i].y);
             nest.draw(GameGlobals.viewport);
             nest.flag('controllable');
             side1.add(nest);
             GameGlobals.shipManager.register(nest);
             
             for(var j=0; j < Map.spawns[i].miners.length; j++){
-                var miner = new VrenrMiner('ship_' + j, Map.spawns[i].miners[j].x, Map.spawns[i].miners[j].y);
+                var miner = new KriivMiner('ship_' + j, Map.spawns[i].miners[j].x, Map.spawns[i].miners[j].y);
                 miner.flag('controllable');
                 miner.draw(GameGlobals.viewport);
                 side1.add(miner);

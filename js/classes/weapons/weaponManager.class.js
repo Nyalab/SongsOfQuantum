@@ -15,10 +15,6 @@ var WeaponManager = Class.extend({
         this.weapons.push(weapon);
     },
     
-    generateId: function(){
-        return "weapon_" + this.weaponsCount++;
-    },
-    
     process: function(){
         for(var i=0; i < this.weapons.length; i++){
             if(this.weapons[i] != null && this.weapons[i].life > 0){

@@ -1,7 +1,9 @@
-var Asteroid = Drawable.extend({
+var Asteroid = Entity.extend({
     __construct: function(id, x, y){
-        this.minerals = 1500;
-        this._super(id, 0, x, y, 'images/bodies/asteroid.png');
+        this._super(id, 0, x, y, 'images/bodies/asteroid.png', 300);
         this.flag('asteroid');
+        this.properties = {
+        	name: "Asteroid"
+        }
     }
 });
