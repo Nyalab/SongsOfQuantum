@@ -39,17 +39,27 @@ var ShipManager = Class.extend({
         $('#' + ship.id).addClass('selected');
     },
 
-    select: function() {
-
+    doMouseSelect: function() {
+        var selected;
+        selected = $("#" + GameGlobals.mouse.selectionId).collision(".ship");
+        // If we have no ship selected, try with buildings
+        if(selected.length == 0)
+        {
+            selected = $("#" + GameGlobals.mouse.selectionId).collision(".building");
+            // If we have no ship and no building, try the asteroids
+            if(selected.length == 0)
+            {
+                selected = $("#" + GameGlobals.mouse.selectionId).collision(".asteroid");
+            }
+        }
+        selected.addClass('selected');
     },
 
     /*
      * Empties the selected units list
      */
     clearSelection: function(){
-        $(this.shipClass).each(function(){
-            $(this).attr('class', $(this).attr('class').replace(' selected', ''));
-        });
+        $(this.shipClass).removeClass('selected');
     },
     
     /*

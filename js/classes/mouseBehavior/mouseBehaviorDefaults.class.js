@@ -146,6 +146,7 @@ var MouseBehaviorDefaults = Class.extend({
 	releaseClick:  function(e) {
         switch (e.which) {
             case 1:
+            	GameGlobals.shipManager.doMouseSelect();
                 GameGlobals.mouse.endSelection();
                 e.stopPropagation();
                 break;
