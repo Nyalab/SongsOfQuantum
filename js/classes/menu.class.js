@@ -11,6 +11,7 @@ var Menu = Class.extend({
         if(this.current != null){
             $(this.current.getSprite()).unbind('jSpaceRuler:life-update');
             $(this.current.getSprite()).unbind('jSpaceRuler:production-update');
+            $(this.current.getSprite()).unbind('jSpaceRuler:die');
         }
         
         this.current = current;
@@ -19,6 +20,7 @@ var Menu = Class.extend({
             var __this = this;
             $(this.current.getSprite()).bind('jSpaceRuler:life-update', function(){__this.updateUnitLife()});
             $(this.current.getSprite()).bind('jSpaceRuler:production-update', function(){__this.updateProductionDisplay()});
+            $(this.current.getSprite()).bind('jSpaceRuler:die', function(){__this.clear();});
         }
     },
     

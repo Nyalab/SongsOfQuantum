@@ -35,6 +35,7 @@ var Entity = Movable.extend({
     
     die: function(){
         this.life = 0;
+        this.dispatch("jSpaceRuler:die");
         this.getSprite().remove();
     },
     

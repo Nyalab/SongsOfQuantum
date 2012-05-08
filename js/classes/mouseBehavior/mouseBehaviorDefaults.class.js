@@ -18,6 +18,7 @@ var MouseBehaviorDefaults = Class.extend({
 	    e.stopPropagation();
 	    switch (e.which) {
 	    	case 1:
+	    		GameGlobals.shipManager.pick($(this).data('drawable'));   
 	    		GameGlobals.gui.menu.applySelection($(this));
 	    	break;
 	        case 3:
