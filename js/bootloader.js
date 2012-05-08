@@ -20,6 +20,7 @@ $LAB
    .script("js/lib/jquery.event.drag-2.0.min.js")
    .script("js/lib/jquery.mousewheel.js")
    .script("js/lib/jquery.resizeevent.js")
+   .script("js/lib/jquery.stellar.js")
    .script("js/lib/aplweb.scrollbars.js")
 
    // Generic classes
