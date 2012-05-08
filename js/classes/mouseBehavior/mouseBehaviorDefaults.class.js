@@ -103,14 +103,13 @@ var MouseBehaviorDefaults = Class.extend({
 	viewport: function(e) {
 	    switch (e.which) {
 	        case 1:
-	            Cursor.setNoCursor();
+	            GameGlobals.cursor.setNoCursor();
 	            GameGlobals.shipManager.clearSelection();
 	            GameGlobals.gui.menu.applySelection([]);
-	            // We pass the coordinates of the cursor
-				Cursor.beginSelection(e.pageX,e.pageY)
+				GameGlobals.mouse.beginSelection(e.pageX,e.pageY);
 	            break;
 	        case 3:
-	            Cursor.clickEffect(e);
+	            GameGlobals.cursor.clickEffect(e);
 	            
 	            var localX = e.pageX - $(GameGlobals.viewport).offset().left;
 	            var localY = e.pageY - $(GameGlobals.viewport).offset().top;
@@ -139,14 +138,14 @@ var MouseBehaviorDefaults = Class.extend({
 	},
 
 	mouseMove: function(e) {
-        Cursor.mouseX = e.pageX;
-        Cursor.mouseY = e.pageY;
+        GameGlobals.cursor.mouseX = e.pageX;
+        GameGlobals.cursor.mouseY = e.pageY;
     },
 
 	releaseClick:  function(e) {
         switch (e.which) {
             case 1:
-                Cursor.endSelection();
+                GameGlobals.mouse.endSelection();
                 e.stopPropagation();
                 break;
             case 2:

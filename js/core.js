@@ -4,6 +4,7 @@ var GameGlobals = {
     viewport: '#viewport',
     playerSide: null,
     mouse: new Mouse(),
+    cursor: new Cursor(),
     gui:{
         mineralsDisplay: '#minerals_display',
         
