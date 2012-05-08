@@ -25,14 +25,14 @@ var Game = Class.extend({
         }
         
         for(i=0; i<Map.spawns.length; i++){
-            var nest = new VrenrNest('building_' + i, Map.spawns[i].x, Map.spawns[i].y);
+            var nest = new KriivNest('building_' + i, Map.spawns[i].x, Map.spawns[i].y);
             nest.draw(GameGlobals.viewport);
             nest.flag('controllable');
             side1.add(nest);
             GameGlobals.shipManager.register(nest);
             
             for(var j=0; j < Map.spawns[i].miners.length; j++){
-                var miner = new VrenrMiner('ship_' + j, Map.spawns[i].miners[j].x, Map.spawns[i].miners[j].y);
+                var miner = new KriivMiner('ship_' + j, Map.spawns[i].miners[j].x, Map.spawns[i].miners[j].y);
                 miner.flag('controllable');
                 miner.draw(GameGlobals.viewport);
                 side1.add(miner);

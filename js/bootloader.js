@@ -32,9 +32,9 @@ $LAB
 
    // Ships classes
    .script("js/classes/ships/ship.class.js")
-   .script("js/classes/ships/vrenrShip.class.js")
-   .script("js/classes/ships/vrenrHive.class.js")
-   .script("js/classes/ships/vrenrMiner.class.js")
+   .script("js/classes/ships/kriivShip.class.js")
+   .script("js/classes/ships/kriivHive.class.js")
+   .script("js/classes/ships/kriivMiner.class.js")
    .script("js/classes/ships/shipManager.class.js")
 
    // Weapons classes
@@ -44,7 +44,7 @@ $LAB
 
    // Building classes
    .script("js/classes/buildings/building.class.js")
-   .script("js/classes/buildings/vrenrNest.class.js")
+   .script("js/classes/buildings/kriivNest.class.js")
 
    // Side classes
    .script("js/classes/side.class.js")
