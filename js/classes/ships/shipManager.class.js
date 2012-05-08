@@ -39,6 +39,10 @@ var ShipManager = Class.extend({
         $('#' + ship.id).addClass('selected');
     },
 
+    select: function() {
+
+    },
+
     /*
      * Empties the selected units list
      */

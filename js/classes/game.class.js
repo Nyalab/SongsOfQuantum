@@ -38,7 +38,7 @@ var Game = Class.extend({
         }
 
         
-        Cursor.init();
+        GameGlobals.cursor.init();
     },
 
     loop: function(){
