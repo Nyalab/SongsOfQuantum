@@ -15,6 +15,13 @@ var Game = Class.extend({
         
         var i;
         
+        $('#viewport').css('width', Map.miscellaneous.width + 'px');
+        $('#viewport').css('height', Map.miscellaneous.height + 'px');
+
+        // Parallax init
+        $('#viewport').append('<div id="parallax" data-stellar-ratio="0.5" style="position: relative;">' + Map.background + '</div>');
+        $('#map').stellar();
+
         for(i=0; i<Map.asteroids.length; i++){
             var asteroid = new Asteroid('asteroid_' + i, Map.asteroids[i].x, Map.asteroids[i].y);
             asteroid.draw(GameGlobals.viewport);
