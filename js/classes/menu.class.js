@@ -1,6 +1,6 @@
 var Menu = Class.extend({
 
-    // TODO - Clearing menu if selected entity dies.
+    /* TODO - Clearing menu if selected entity dies. */
 
     __construct: function(){
         this.selection = null;
