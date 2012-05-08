@@ -15,9 +15,11 @@ Features
 --------
 - Moving, Attacking with units
 - Picking units by clicking them
+- Selecting multiple units at a time with the rectangular selection
 - Mining asteroids
 - Creating units from buildings
 - Creating buildings with units
+- Rally points
 - Map loading
 
 What's next?
@@ -33,16 +35,10 @@ What's next?
   - Life bar
   - Building creation progress
   - Building placeholder when placing it with the mouse
-- Maps
-  - To improve
-- Mouse rectangular selection
-  - To implement 
 - Behaviors for units
   - Hold position
   - Fire at will
   - Peacefull
-- Rally points
-  - To implement 
 - Control groups
   - To implement
 - Collisions & Pathfinding
