@@ -10,7 +10,7 @@ var Game = Class.extend({
             return false;
         });
 
-        var side1 = new Side('player1', '#005500');
+        var side1 = new Side('player1', '#8B8D28');
         var side2 = new Side('player2', '#550000');
 
         GameGlobals.playerSide = side1;

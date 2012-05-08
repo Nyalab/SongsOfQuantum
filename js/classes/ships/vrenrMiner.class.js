@@ -71,6 +71,7 @@ var VrenrMiner = VrenrShip.extend({
        else{
            this.setSprite('images/vrenr/miner_full.png');
            this.properties.mining.current = 0;
+           this.lastAsteroid.inflictDamages(this.properties.mining.capacity);
            this.findNearestDepositPoint();
             this.setOrder({
                 command: "DEPOSIT", 
@@ -85,16 +86,21 @@ var VrenrMiner = VrenrShip.extend({
            this.computeMove();
        }
        else{
-            this.setSprite('images/vrenr/miner.png');
-            this.getSide().changeMinerals(this.properties.mining.capacity);
-            if(this.lastAsteroid == null){
-                this.lastAsteroid = this.findNearest('.asteroid');
-            }
-           
+          this.setSprite('images/vrenr/miner.png');
+          this.getSide().changeMinerals(this.properties.mining.capacity);
+          if(this.lastAsteroid == null || this.lastAsteroid.isDead()){
+              this.lastAsteroid = this.findNearest('.asteroid');
+          }
+          
+          if(this.lastAsteroid != null){
             this.setOrder({
                 command: "GATHER", 
                 target: this.lastAsteroid
             });
+          }
+          else{
+            this.nextOrder();
+          }
        }
    },
 

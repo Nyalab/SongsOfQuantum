@@ -15,7 +15,7 @@ var GameGlobals = {
 
         menu: new Menu()
     }
-}
+};
 
 $(document).ready(function(){
     

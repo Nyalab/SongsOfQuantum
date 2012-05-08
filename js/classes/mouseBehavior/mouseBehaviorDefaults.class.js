@@ -12,6 +12,9 @@ var MouseBehaviorDefaults = Class.extend({
 	asteroid: function(e) {
 	    e.stopPropagation();
 	    switch (e.which) {
+	    	case 1:
+	    		GameGlobals.gui.menu.applySelection($(this));
+	    	break;
 	        case 3:
 			    var asteroid = $(this).data('drawable');
 			    var order = { command: "GATHER", target: asteroid };
