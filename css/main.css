@@ -51,11 +51,11 @@ html, body{
     position: fixed;
     bottom: 1px;
     height: 200px;
-    background: #333333;
+    background: #E0DDD3;
 }
 
 .selected{
-    border: 1px solid green;
+    border: 1px dotted green;
 }
 
 #buttons{
@@ -73,7 +73,6 @@ html, body{
     -moz-border-radius: .8em;
     border-radius: .8em;
 
-    background-color: #111111;
     float: left;
     margin-top: 3px;
     margin-right: 3px;
@@ -90,9 +89,12 @@ html, body{
     cursor: pointer;
 }
 
+.minimap, .dock, .buttons div {
+    background: #76A690;
+}
 .minimap {
     float: left;
-    background-color: #111111;
+    display: none;
     -webkit-border-radius: .8em; 
     -moz-border-radius: .8em;
     border-radius: .8em;
@@ -122,11 +124,73 @@ html, body{
     -webkit-border-radius: .8em; 
     -moz-border-radius: .8em;
     border-radius: .8em;
-
-    background-color: #111111;
-    height: 100%;
+    margin: 3px 6px 3px 3px;
+    height: 194px;
+    width: 0;
 }
 
 #mouseSelection {
     border: 1px dotted red;
+}
+
+.entityInDockListDefault {
+    width: 50px;
+    height: 50px;
+    border: 1px dotted green;
+    margin: 5px;
+    float: left;
+}
+
+.entityInDockSingleDefault {
+    width: 100px;
+    height: 100px;
+    background: red;
+    margin: 0 auto;
+}
+
+.entityVisualInDockListDefault {
+    position: relative; width: 54px; border-width: 50px 18px 0; border-style: solid; border-color: #D9702C transparent; margin: 50px auto;
+}
+
+.entityVisualInDockListDefault:before {
+    content: ""; position: absolute; height: 0; width: 0; top: -85px; left: -18px; border-width: 0 45px 35px; border-style: solid; border-color: transparent transparent #D9702C;
+}
+
+.entityVisualInDockListSpaceInvader {
+    margin: 10px auto 20px auto; width: 0px; height: 0px; border-right: 60px solid transparent; border-top: 60px solid #D9702C; border-left: 60px solid #D9702C; border-bottom: 60px solid #D9702C; border-top-left-radius: 60px; border-top-right-radius: 60px; border-bottom-left-radius: 60px; border-bottom-right-radius: 60px;
+}
+
+.entityCountersInDockListDefault h2 {
+    text-align: center;
+    color: #98442A;
+    font-weight: bold;
+}
+
+.entityInDockContainer {
+    width: 95%;
+    height: 99%;
+    margin: 0 auto;
+    border: 1px dotted red;
+}
+
+.entityInDockLeftSubContainer {
+    float: left;
+    width: 30%;
+    height: 100%;
+    border: 1px dotted green;
+}
+
+.entityInDockRightSubContainer {
+    float: left;
+    width: 69.6%;
+    height: 100%;
+    border: 1px dotted green;
+}
+
+.entityInDockRightSubContainer h1 {
+    text-align: center;
+    color: #BE002C;
+    font-size: 24px;
+    font-weight: bold;
+    margin: 30px auto;
 }

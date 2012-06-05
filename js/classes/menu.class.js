@@ -6,6 +6,20 @@ var Menu = Class.extend({
         this.selection = null;
         this.current = null;
     },
+
+    setDimensions: function() {
+        // Animate the spawning of the minimap
+        // TODO Improve the effect of that
+        $("#minimap").height(0).css('display', 'block').animate({height: $("#dock").height() + "px"}, 2000);
+
+        // Calculate the space taken by the minimap and the buttons, then we set the space left to the dock
+        // TODO Improve the effect of that
+        var menuspace = parseInt($("#minimap").width()) + parseInt($("#minimap").css("margin-left").replace("px", "")) + parseInt($("#minimap").css("margin-right").replace("px", ""));
+        var buttonsspace = parseInt($("#buttons").width()) + parseInt($("#buttons").css("margin-left").replace("px", "")) + parseInt($("#buttons").css("margin-right").replace("px", ""));
+        var spaceleft = $("#menu").width() - buttonsspace - menuspace - parseInt($("#dock").css("margin-left").replace("px", "")) - parseInt($("#dock").css("margin-right").replace("px", ""))
+        $("#dock").animate({width: spaceleft + "px"}, 2000);
+
+    },
     
     setCurrent: function(current){
         if(this.current != null){
@@ -120,5 +134,38 @@ var Menu = Class.extend({
                 });
             });
         }
+    },
+
+    renderSelected: function() {
+        this.clean();
+
+        selected = $(".selected");
+
+        var ship = null;
+        var tpl = "";
+        if(selected.length == 1)
+        {
+            ship = GameGlobals.shipManager.pick(selected.attr('id'));
+            tpl = ship.renderInDockSingle();
+            tpl.appendTo($("#dock"));
+        }
+        else if(selected.length > 1)
+        {
+            var container = $("<div/>", {
+              'class' : "entityInDockContainer"
+            });
+
+            selected.each(function() {
+                ship = GameGlobals.shipManager.pick($(this).attr('id'));
+                tpl = ship.renderInDockList();
+                tpl.appendTo(container);
+            });
+
+            container.appendTo($("#dock"));
+        }
+    },
+
+    clean: function() {
+        $("#dock").empty();
     }
 });

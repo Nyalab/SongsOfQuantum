@@ -38,6 +38,14 @@ var KriivNest = Building.extend({
    
     processBuildHive: function(){
         this.processAddBuild(KriivHive, 150, 30000);
+    },
+
+    getBigVisual: function() {
+        var visual = $("<div>", {
+          'class' : "entityVisualInDockListSpaceInvader"
+        });
+
+        return visual;
     }
 });
 

@@ -107,6 +107,6 @@ var KriivMiner = KriivShip.extend({
 
    processPlaceCommandCenter: function(){
       this.processPlaceBuilding(KriivNest, 300, 10000);
-   },
+   }
    
 });

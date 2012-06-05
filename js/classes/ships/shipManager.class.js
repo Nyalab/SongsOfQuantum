@@ -2,6 +2,7 @@ var ShipManager = Class.extend({
     __construct: function(shipClass){
         this.shipClass = shipClass;
         this.ships = [];
+        this.shipsRegistry = [];
     },
     
     register: function(ship){
@@ -12,7 +13,9 @@ var ShipManager = Class.extend({
                 return;
             }
         }
-    
+
+        this.shipsRegistry[ship.id] = ship;
+
         this.ships.push(ship);
         processFilters();
     },
@@ -32,11 +35,21 @@ var ShipManager = Class.extend({
     },
 
     /*
-     * Selects one unit
-     */
+     * Picks one unit
+     
     pick: function(ship){
         this.clearSelection();
         $('#' + ship.id).addClass('selected');
+    },
+*/
+    /*
+     * Selects an unit
+     */
+    pick: function(selector) {
+        if(selector in this.shipsRegistry)
+            return this.shipsRegistry[selector];
+        else
+            console.log('Object not found');
     },
 
     doMouseSelect: function() {
@@ -53,6 +66,11 @@ var ShipManager = Class.extend({
             }
         }
         selected.addClass('selected');
+
+        if(selected.length)
+            GameGlobals.gui.menu.renderSelected();
+        else
+            GameGlobals.gui.menu.clean();
     },
 
     /*

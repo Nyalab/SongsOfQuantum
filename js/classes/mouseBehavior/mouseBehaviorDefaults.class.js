@@ -48,8 +48,9 @@ var MouseBehaviorDefaults = Class.extend({
 	    switch (e.which) {
 	        case 1:
 	            if($(this).hasClass('controllable')){
-	                GameGlobals.shipManager.pick($(this).data('drawable'));     
-	                GameGlobals.gui.menu.applySelection($('.selected'));
+	            	alert('Sorry tristan, we will have to recode this.');
+	                /*GameGlobals.shipManager.pick($(this).data('drawable'));     
+	                GameGlobals.gui.menu.applySelection($('.selected'));*/
 	            }
 	            
 	            break;
@@ -80,9 +81,10 @@ var MouseBehaviorDefaults = Class.extend({
 	    e.stopPropagation();
 	    switch (e.which) {
 	        case 1:
-	            if($(this).hasClass('controllable')){
-	                GameGlobals.shipManager.pick($(this).data('drawable'));   
-	                GameGlobals.gui.menu.applySelection($('.selected'));
+	            if($(this).hasClass('controllable')){	            	
+	            	alert('Sorry tristan, we will have to recode this.');
+	                /*GameGlobals.shipManager.pick($(this).data('drawable'));   
+	                GameGlobals.gui.menu.applySelection($('.selected'));*/
 	            }
 	            
 	            break;
