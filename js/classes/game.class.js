@@ -6,6 +6,8 @@ var Game = Class.extend({
 
     start: function(){
 
+        GameGlobals.gui.menu.setDimensions();
+
         var side1 = new Side('player1', '#8B8D28');
         var side2 = new Side('player2', '#550000');
 
