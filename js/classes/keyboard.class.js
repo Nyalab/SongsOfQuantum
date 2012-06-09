@@ -63,7 +63,7 @@ var Keyboard = Class.extend({
           			GameGlobals.keyboard.createCtrlGroup(2);
           		}
           		else {
-          			GameGlobals.keyboard.retrieveCtrlGroup(1);
+          			GameGlobals.keyboard.retrieveCtrlGroup(2);
           		}
             	break;	
           	case 51: // 3
@@ -127,15 +127,13 @@ var Keyboard = Class.extend({
 	},
 
 	retrieveCtrlGroup: function(group) {
-		if(str in GameGlobals.keyboard) {
+		str = "ctrlGroup" + group;
+		if(GameGlobals.keyboard[str].length) {
 			$(".selected").removeClass('selected');
-			str = "ctrlGroup" + group;
-			console.log(GameGlobals.keyboard[str]);
 			GameGlobals.keyboard[str].each(function() {
 				$(this).addClass('selected');
 			});
 			GameGlobals.gui.menu.renderSelected();
-			console.log(GameGlobals.keyboard);
 		}
 	}
 });
