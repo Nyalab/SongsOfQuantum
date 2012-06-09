@@ -60,7 +60,7 @@ html, body{
 
 #buttons{
     float: right;
-    width: 264px;
+    width: 198px;
     height: 201px;
 }
 
@@ -125,7 +125,7 @@ html, body{
     -moz-border-radius: .8em;
     border-radius: .8em;
     margin: 3px 6px 3px 3px;
-    height: 194px;
+    height: 164px;
     width: 0;
 }
 

@@ -56,6 +56,7 @@ $LAB
    // Mouse & cursor class
    .script("js/classes/cursor.class.js")
    .script("js/classes/mouse.class.js")
+   .script("js/classes/keyboard.class.js")
    .script("js/classes/mouseBehavior/mouseBehaviorDefaults.class.js")
    .script("js/classes/mouseBehavior/mouseBehaviorPlaceBuilding.class.js")
 
