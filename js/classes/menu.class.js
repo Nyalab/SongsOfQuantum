@@ -10,11 +10,12 @@ var Menu = Class.extend({
         var minimap_height = $("#minimap").height();
         $("#minimap").height(0).css('display', 'block').animate({height: minimap_height + "px"}, 2000);
 
-        // Calculate the space taken by the minimap and the buttons, then we set the space left to the dock
+        // Calculate the space taken by the minimap and the buttons and the control groups, then we set the space left to the dock
         // TODO Improve the effect of that
-        var menuspace = parseInt($("#minimap").width()) + parseInt($("#minimap").css("margin-left").replace("px", "")) + parseInt($("#minimap").css("margin-right").replace("px", ""));
+        var minimapspace = parseInt($("#minimap").width()) + parseInt($("#minimap").css("margin-left").replace("px", "")) + parseInt($("#minimap").css("margin-right").replace("px", ""));
+        var ctrlgroupsspace = parseInt($("#ctrlgroups").width()) + parseInt($("#ctrlgroups").css("margin-left").replace("px", "")) + parseInt($("#ctrlgroups").css("margin-right").replace("px", ""));
         var buttonsspace = parseInt($("#buttons").width()) + parseInt($("#buttons").css("margin-left").replace("px", "")) + parseInt($("#buttons").css("margin-right").replace("px", ""));
-        var spaceleft = $("#menu").width() - buttonsspace - menuspace - parseInt($("#dock").css("margin-left").replace("px", "")) - parseInt($("#dock").css("margin-right").replace("px", ""))
+        var spaceleft = $("#menu").width() - buttonsspace - minimapspace - ctrlgroupsspace - parseInt($("#dock").css("margin-left").replace("px", "")) - parseInt($("#dock").css("margin-right").replace("px", ""))
         $("#dock").animate({width: spaceleft + "px"}, 2000);
 
     },
