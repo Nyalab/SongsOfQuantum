@@ -59,17 +59,44 @@ var KriivMiner = KriivShip.extend({
        this.depositPoint = this.findNearest('.kriiv.mainbuilding.' + this.getSide().name);
    },
    
+   findAsteroid: function(){
+    this.lastAsteroid = this.findNearest('.asteroid.free');
+    this.setOrder({
+        command: "GATHER", 
+        target: this.lastAsteroid
+    });
+    return;
+   },
+
    processGather: function(order){
        //TODO - Not changing of asteroid when going to it if this one disappears.
+       
+       // The asteroid to mine is the one from the order received.
        this.lastAsteroid = order.target;
-       if(order.target.getPosition().distanceFrom(this.getPosition()) > this.properties.mining.range){
-           this.setTarget(order.target.getPosition());
+       
+       if(this.lastAsteroid == null || this.lastAsteroid.isDead()){
+        this.findAsteroid();
+        return;
+       }
+
+       // If the miner is too far
+       if(this.lastAsteroid.getPosition().distanceFrom(this.getPosition()) > this.properties.mining.range){
+           this.setTarget(this.lastAsteroid.getPosition());
            this.computeMove();
        }
+       // If the miner is in range and has not finished.
        else if(this.properties.mining.current < this.properties.mining.cooldown){
+           if(!this.lastAsteroid.isFree() && this.lastAsteroid.getMiner() != this){
+             this.findAsteroid();
+             return;
+           }
+
            this.properties.mining.current++;
+           this.lastAsteroid.occupy(this);
        }
+       // If the miner has finished
        else{
+           this.lastAsteroid.free();
            this.setSprite('images/kriiv/miner_full.png');
            this.properties.mining.current = 0;
            this.lastAsteroid.inflictDamages(this.properties.mining.capacity);
@@ -89,19 +116,11 @@ var KriivMiner = KriivShip.extend({
        else{
           this.setSprite('images/kriiv/miner.png');
           this.getSide().changeMinerals(this.properties.mining.capacity);
-          if(this.lastAsteroid == null || this.lastAsteroid.isDead()){
-              this.lastAsteroid = this.findNearest('.asteroid');
-          }
-          
-          if(this.lastAsteroid != null){
-            this.setOrder({
-                command: "GATHER", 
-                target: this.lastAsteroid
-            });
-          }
-          else{
-            this.nextOrder();
-          }
+
+          this.setOrder({
+              command: "GATHER", 
+              target: this.lastAsteroid
+          });
        }
    },
 

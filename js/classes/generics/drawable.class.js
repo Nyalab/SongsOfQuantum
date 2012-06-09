@@ -6,6 +6,8 @@ var Drawable = Class.extend({
         this.angle = angle;
         this.image = image;
         this.flags = [];
+
+        this.renderers = [];
     },
     
     dispatch: function(name){
@@ -35,26 +37,12 @@ var Drawable = Class.extend({
         this.getSprite().removeClass(flag);
     },
     
-    draw : function(view){
-        
-        var className = "";
-        while(this.flags.length > 0){
-            className += this.flags.pop() + " ";
-        }
-        
-        var img = $('<img />')
-            .attr('id', this.id)
-            .attr('src', this.image)
-            .addClass(className)
-            .css('position', 'absolute')
-            .css('left', this.x + 'px')
-            .css('top', this.y + 'px')
-            .load(function(){
-                $(this).data('drawable').refreshSprite();
-            });
-        
-        $(view).append(img);
-        $('#' + this.id).data('drawable', this);
+    setRenderer: function(contextName, renderer){
+        this.renderers[contextName] = renderer;
+    },
+
+    draw : function(contextName){
+        return this.renderers[contextName](this);
     },
     
     refreshSprite: function(){

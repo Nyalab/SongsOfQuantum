@@ -2,7 +2,7 @@ var ShipManager = Class.extend({
     __construct: function(shipClass){
         this.shipClass = shipClass;
         this.ships = [];
-        this.shipsRegistry = [];
+        this.pickMode = false;
     },
     
     register: function(ship){
@@ -13,8 +13,6 @@ var ShipManager = Class.extend({
                 return;
             }
         }
-
-        this.shipsRegistry[ship.id] = ship;
 
         this.ships.push(ship);
         processFilters();
@@ -36,20 +34,12 @@ var ShipManager = Class.extend({
 
     /*
      * Picks one unit
-     
+     */
     pick: function(ship){
         this.clearSelection();
         $('#' + ship.id).addClass('selected');
-    },
-*/
-    /*
-     * Selects an unit
-     */
-    pick: function(selector) {
-        if(selector in this.shipsRegistry)
-            return this.shipsRegistry[selector];
-        else
-            console.log('Object not found');
+        GameGlobals.gui.menu.renderSelected();
+        this.pickMode = true;
     },
 
     doMouseSelect: function() {
@@ -67,10 +57,15 @@ var ShipManager = Class.extend({
         }
         selected.addClass('selected');
 
-        if(selected.length)
+        if(selected.length){
             GameGlobals.gui.menu.renderSelected();
-        else
+        }
+        else if(this.pickMode){
+            this.pickMode= false;
+        }
+        else{
             GameGlobals.gui.menu.clean();
+        }
     },
 
     /*
@@ -82,7 +77,7 @@ var ShipManager = Class.extend({
     
     /*
      * Iterates trough the selected ships and buildings. In func, $(this) points to the html element of the selected item.
-     * You can use $(this).data('drawable') to access the class of the item itself.
+     * You can use $(this).data('binded-class') to access the class of the item itself.
      */
     applyToEach: function(func){
         $('.selected').each(func);

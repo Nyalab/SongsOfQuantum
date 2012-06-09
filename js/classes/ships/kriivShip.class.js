@@ -28,7 +28,7 @@ var KriivShip = Ship.extend({
       }
       else{
         var nest = new build('building_' + Guid.generate(), position.elements[0], position.elements[1]);
-        nest.draw(GameGlobals.viewport);
+        nest.draw('map').appendTo(GameGlobals.viewport);;
         nest.flag('controllable');
         nest.disable();
         GameGlobals.playerSide.add(nest);

@@ -16,12 +16,7 @@ $LAB
    .script("js/lib/jquery.ui.js")
    .script("js/lib/jquery.rotate.js")
    .script("js/lib/jquery.collision.js")
-   .script("js/lib/jquery.mousehold.js")
-   .script("js/lib/jquery.event.drag-2.0.min.js")
-   .script("js/lib/jquery.mousewheel.js")
-   .script("js/lib/jquery.resizeevent.js")
    .script("js/lib/jquery.stellar.js")
-   .script("js/lib/aplweb.scrollbars.js")
 
    // Generic classes
    .script("js/classes/generics/drawable.class.js")

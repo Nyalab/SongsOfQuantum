@@ -15,7 +15,7 @@ var WeaponGenerator = Class.extend({
         if(this.cooldown < 0){    
             var id = Guid.generate();
             var weapon = new Weapon(id, this.ship.angle, this.ship.x, this.ship.y, this.ship.properties.weapon);
-            weapon.draw(GameGlobals.viewport);
+            weapon.draw('map').appendTo(GameGlobals.viewport);
             weapon.setTrackedTarget(target);
             
             GameGlobals.weaponManager.register(weapon);

@@ -1,6 +1,6 @@
 var GameGlobals = {
     weaponManager: new WeaponManager(),
-    shipManager: new ShipManager('.ship, .building'),
+    shipManager: new ShipManager('.ship, .building, .asteroid'),
     viewport: '#viewport',
     playerSide: null,
     mouse: new Mouse(),
