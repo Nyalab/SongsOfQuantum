@@ -3,6 +3,9 @@ $LAB
    .script("js/lib/class.js")
    .script("js/classes/utils/guid.class.js")
 
+   // Buzz
+   .script('js/lib/buzz.js')
+
    // Paintbrush image processing library
    .script("js/lib/paintbrush.common.js")
    .script("js/lib/paintbrush.core.js")

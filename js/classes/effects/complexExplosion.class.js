@@ -22,6 +22,13 @@ var ComplexExplosion = Drawable.extend({
 	            explosion.draw('map').appendTo(div);
 	        }, 0);
 
+
+	        var mySound = new buzz.sound( "sound/effects/explosion01", {
+			    formats: [ "mp3", "ogg"]
+			});
+
+			mySound.play();
+
             return div;
          });
     }
