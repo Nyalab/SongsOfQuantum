@@ -89,9 +89,10 @@ html, body{
     cursor: pointer;
 }
 
-.minimap, .dock, .buttons div {
+.minimap, .ctrlgroups div, .dock, .buttons div {
     background: #76A690;
 }
+
 .minimap {
     float: left;
     display: none;
@@ -102,6 +103,37 @@ html, body{
     margin: 3px;
     height: 194px;
 }
+
+.ctrlgroups {
+    float: left;
+}
+
+.ctrlgroups div {
+    -webkit-border-radius: .8em; 
+    -moz-border-radius: .8em;
+    border-radius: .8em;
+}
+
+.ctrlgroups > div {
+    width: 62px;
+    margin: 3px;
+    height: 62px;
+    position: relative;
+}
+
+.ctrlgroups div div {
+    width: 15px;
+    height: 15px;
+    font-size: 9px;
+    font-weight: bold;
+    text-align: center;
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    border-top: 1px solid black;
+    border-left: 1px solid black;
+}
+
 
 .queue_production_item{
     float: left;
@@ -125,7 +157,7 @@ html, body{
     -moz-border-radius: .8em;
     border-radius: .8em;
     margin: 3px 6px 3px 3px;
-    height: 164px;
+    height: 194px;
     width: 0;
 }
 
