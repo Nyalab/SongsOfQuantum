@@ -28,8 +28,11 @@ var Asteroid = Entity.extend({
     },
 
     die: function(){
-        var explosion = new Explosion('explosion', this.x, this.y, 50);
-        explosion.draw('map').appendTo(GameGlobals.viewport);
+
+
+        var complexExplosion = new ComplexExplosion(this.x, this.y, 2000, 50, 3, 10);
+        complexExplosion.draw('map').appendTo(GameGlobals.viewport);
+
         this._super();
     }
 });

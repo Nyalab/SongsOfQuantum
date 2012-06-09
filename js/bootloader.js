@@ -25,6 +25,7 @@ $LAB
 
    // Effects classes
    .script("js/classes/effects/explosion.class.js")
+   .script("js/classes/effects/complexExplosion.class.js")
 
    // Space bodies classes
    .script("js/classes/bodies/asteroid.class.js")
