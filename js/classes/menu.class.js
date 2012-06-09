@@ -99,7 +99,7 @@ var Menu = Class.extend({
         this.clear();
         this.selection = selection;
         for(var i=0; i < selection.length; i++){
-            var unit = this.selection.eq(i).data('drawable');
+            var unit = this.selection.eq(i).data('binded-class');
             
             this.setCurrent(unit);
             this.updateUnitTitle();
@@ -126,7 +126,7 @@ var Menu = Class.extend({
             $(items[i].slot).click(function(){
                 var command = $(this).data('command');
                 GameGlobals.shipManager.applyToEach(function(){
-                    var ship = $(this).data('drawable');
+                    var ship = $(this).data('binded-class');
                     ship.setOrder({
                         command: command
                     });
@@ -144,8 +144,8 @@ var Menu = Class.extend({
         var tpl = "";
         if(selected.length == 1)
         {
-            ship = GameGlobals.shipManager.pick(selected.attr('id'));
-            tpl = ship.renderInDockSingle();
+            ship = selected.data('binded-class');
+            tpl = ship.draw('dock-single');
             tpl.appendTo($("#dock"));
         }
         else if(selected.length > 1)
@@ -155,8 +155,8 @@ var Menu = Class.extend({
             });
 
             selected.each(function() {
-                ship = GameGlobals.shipManager.pick($(this).attr('id'));
-                tpl = ship.renderInDockList();
+                ship = $(this).data('binded-class');
+                tpl = ship.draw('dock-multi');
                 tpl.appendTo(container);
             });
 

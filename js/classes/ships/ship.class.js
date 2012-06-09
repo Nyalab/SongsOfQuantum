@@ -18,14 +18,14 @@ var Ship = Entity.extend({
        $(selector).each(function(){
            
            if(selected == null){
-               selected = $(this).data('drawable');
+               selected = $(this).data('binded-class');
            }
            else{
-               var tested = $(this).data('drawable').getPosition();
+               var tested = $(this).data('binded-class').getPosition();
                var current = selected.getPosition();
 
                if(_this.getPosition().distanceFrom(tested) < _this.getPosition().distanceFrom(current)){
-                   selected = $(this).data('drawable');
+                   selected = $(this).data('binded-class');
                }
            }
        });

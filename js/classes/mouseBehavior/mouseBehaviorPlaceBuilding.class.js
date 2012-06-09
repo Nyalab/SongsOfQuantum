@@ -24,7 +24,7 @@ var MouseBehaviorPlacebuilding = Class.extend({
 	            var localY = e.pageY - $(GameGlobals.viewport).offset().top;
 	            
 				GameGlobals.shipManager.applyToEach(function(){
-	                var ship = $(this).data('drawable');
+	                var ship = $(this).data('binded-class');
 	                ship.setOrder({
 	                    command: "BUILD",
 	                    build: options.build,

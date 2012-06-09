@@ -6,6 +6,81 @@ var Entity = Movable.extend({
         this.maximumLife = life;
         this.orderList = [];
         this._super(id, angle, x, y, image);
+
+
+        this.setRenderer('map', function(entity){
+            var className = "";
+            while(entity.flags.length > 0){
+                className += entity.flags.pop() + " ";
+            }
+            
+            var img = $('<img />')
+                .attr('id', entity.id)
+                .attr('src', entity.image)
+                .addClass(className)
+                .css('position', 'absolute')
+                .css('left', entity.x + 'px')
+                .css('top', entity.y + 'px')
+                .load(function(){
+                    $(this).data('binded-class').refreshSprite();
+                });
+
+            img.data('binded-class', entity);
+
+            return img;
+        });
+
+
+        this.setRenderer('dock-single', function(entity){
+            var container = $("<div/>", {
+              'class' : "entityInDockContainer"
+            });
+
+            var leftsubcontainer = $("<div/>", {
+              'class' : "entityInDockLeftSubContainer"
+            }).appendTo(container);
+
+            entity.draw('big-visual').appendTo(leftsubcontainer);
+
+            var counters = $("<p/>", {
+              'class' : "entityCountersInDockListDefault"
+            }).appendTo(leftsubcontainer);
+
+            var life = $("<h2/>", {
+              'id' : 'unit_life',
+              'text' : entity.getLife() + ' / ' + entity.getMaxLife()
+            }).appendTo(counters);
+
+            var rightsubcontainer = $("<div/>", {
+              'class' : "entityInDockRightSubContainer"
+            }).appendTo(container);
+
+            var name = $("<h1/>", {
+              'id' : 'unit_title',
+              'text' : entity.getName()
+            }).appendTo(rightsubcontainer);
+
+            return container;
+        });
+        
+        this.setRenderer('dock-multi', function(entity){
+            var container = $('<div>', { 'class': 'entityInDockListDefault' });
+            var img = $('<img>', {
+                'src': entity.properties.image
+            }).appendTo(container);
+
+            return container; 
+        });
+
+
+        this.setRenderer('big-visual', function(entity){
+            var visual = $("<div>", {
+              'class' : "entityVisualInDockListDefault"
+            });
+
+            return visual;
+        });
+
     },
 
     getName: function(){
@@ -94,61 +169,5 @@ var Entity = Movable.extend({
     processUnknown: function(order){
         console.log('Error: unknown order: ' + order.command)
         this.nextOrder();
-    },
-
-    // TODO Implement all these function for each ship (childs included), at least do the default
-    renderOnMap: function() {},
-    renderOnMinimap: function() {},
-
-    renderInDockSingle: function() {
-        var container = $("<div/>", {
-          'class' : "entityInDockContainer"
-        });
-
-        var leftsubcontainer = $("<div/>", {
-          'class' : "entityInDockLeftSubContainer"
-        }).appendTo(container);
-
-        this.getBigVisual().appendTo(leftsubcontainer);
-
-        var counters = $("<p/>", {
-          'class' : "entityCountersInDockListDefault"
-        }).appendTo(leftsubcontainer);
-
-        var life = $("<h2/>", {
-          'id' : 'unit_life',
-          'text' : this.getLife() + ' / ' + this.getMaxLife()
-        }).appendTo(counters);
-
-        var rightsubcontainer = $("<div/>", {
-          'class' : "entityInDockRightSubContainer"
-        }).appendTo(container);
-
-        var name = $("<h1/>", {
-          'id' : 'unit_title',
-          'text' : this.getName()
-        }).appendTo(rightsubcontainer);
-
-        return container;
-    },
-
-    renderInDockList: function() {
-        var container = $('<div>', { 'class': 'entityInDockListDefault' });
-        var img = $('<img>', {
-            'src': this.properties.image
-        }).appendTo(container);
-
-        return container;
-    },
-
-    getBigVisual: function() {
-        var visual = $("<div>", {
-          'class' : "entityVisualInDockListDefault"
-        });
-
-        return visual;
     }
-
-
-
 });

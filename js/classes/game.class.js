@@ -26,12 +26,12 @@ var Game = Class.extend({
 
         for(i=0; i<Map.asteroids.length; i++){
             var asteroid = new Asteroid('asteroid_' + i, Map.asteroids[i].x, Map.asteroids[i].y);
-            asteroid.draw(GameGlobals.viewport);
+            asteroid.draw('map').appendTo(GameGlobals.viewport);
         }
         
         for(i=0; i<Map.spawns.length; i++){
             var nest = new KriivNest('building_' + i, Map.spawns[i].x, Map.spawns[i].y);
-            nest.draw(GameGlobals.viewport);
+            nest.draw('map').appendTo(GameGlobals.viewport);
             nest.flag('controllable');
             side1.add(nest);
             GameGlobals.shipManager.register(nest);
@@ -39,7 +39,7 @@ var Game = Class.extend({
             for(var j=0; j < Map.spawns[i].miners.length; j++){
                 var miner = new KriivMiner('ship_' + j, Map.spawns[i].miners[j].x, Map.spawns[i].miners[j].y);
                 miner.flag('controllable');
-                miner.draw(GameGlobals.viewport);
+                miner.draw('map').appendTo(GameGlobals.viewport);;
                 side1.add(miner);
                 GameGlobals.shipManager.register(miner);
             }

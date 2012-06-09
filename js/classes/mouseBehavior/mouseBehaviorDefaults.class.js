@@ -18,14 +18,14 @@ var MouseBehaviorDefaults = Class.extend({
 	    e.stopPropagation();
 	    switch (e.which) {
 	    	case 1:
-	    		GameGlobals.shipManager.pick($(this).data('drawable'));   
+	    		GameGlobals.shipManager.pick($(this).data('binded-class'));   
 	    		GameGlobals.gui.menu.applySelection($(this));
 	    	break;
 	        case 3:
-			    var asteroid = $(this).data('drawable');
+			    var asteroid = $(this).data('binded-class');
 			    var order = { command: "GATHER", target: asteroid };
 			    GameGlobals.shipManager.applyToEach(function(){
-			        var ship = $(this).data('drawable');
+			        var ship = $(this).data('binded-class');
 			        if(ship instanceof Building){
 				        ship.setRallyOrder(order);
 			    	}
@@ -49,17 +49,15 @@ var MouseBehaviorDefaults = Class.extend({
 	    switch (e.which) {
 	        case 1:
 	            if($(this).hasClass('controllable')){
-	            	alert('Sorry tristan, we will have to recode this.');
-	                /*GameGlobals.shipManager.pick($(this).data('drawable'));     
-	                GameGlobals.gui.menu.applySelection($('.selected'));*/
+	                GameGlobals.shipManager.pick($(this).data('binded-class'));     
 	            }
 	            
 	            break;
 	        case 3:
-	            var target = $(this).data('drawable');
+	            var target = $(this).data('binded-class');
 	            if($(this).hasClass('controllable')){
 	                GameGlobals.shipManager.applyToEach(function(){
-	                    var ship = $(this).data('drawable');
+	                    var ship = $(this).data('binded-class');
 	                    if(ship instanceof Ship){
 		                    ship.setOrder({
 		                        command: "ATTACK",
@@ -83,9 +81,8 @@ var MouseBehaviorDefaults = Class.extend({
 	    switch (e.which) {
 	        case 1:
 	            if($(this).hasClass('controllable')){	            	
-	            	alert('Sorry tristan, we will have to recode this.');
-	                /*GameGlobals.shipManager.pick($(this).data('drawable'));   
-	                GameGlobals.gui.menu.applySelection($('.selected'));*/
+	                GameGlobals.shipManager.pick($(this).data('binded-class'));   
+	                /*GameGlobals.gui.menu.applySelection($('.selected'));*/
 	            }
 	            
 	            break;
@@ -119,7 +116,7 @@ var MouseBehaviorDefaults = Class.extend({
 	            
 	            
 	            GameGlobals.shipManager.applyToEach(function(){
-	                var ship = $(this).data('drawable');
+	                var ship = $(this).data('binded-class');
 
 			        if(ship instanceof Building){
 				        ship.setRallyOrder({

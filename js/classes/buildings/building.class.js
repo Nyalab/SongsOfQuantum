@@ -109,7 +109,9 @@ var Building = Entity.extend({
         }
 
         unit.flag('controllable');
-        unit.draw(GameGlobals.viewport);
+
+        unit.draw('map').appendTo(GameGlobals.viewport);
+
         this.getSide().add(unit);
         GameGlobals.shipManager.register(unit);
         
