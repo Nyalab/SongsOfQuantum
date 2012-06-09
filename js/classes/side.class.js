@@ -25,7 +25,7 @@ var Side = Class.extend({
     },
     
     add: function(ship){
-        this.colorize(ship);
+        //this.colorize(ship);
         $('#' + ship.id).addClass(this.name);
         $('#' + ship.id).data('side', this);
     }
