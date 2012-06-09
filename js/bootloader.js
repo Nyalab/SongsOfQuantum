@@ -23,6 +23,9 @@ $LAB
    .script("js/classes/generics/movable.class.js")
    .script("js/classes/generics/entity.class.js")
 
+   // Effects classes
+   .script("js/classes/effects/explosion.class.js")
+
    // Space bodies classes
    .script("js/classes/bodies/asteroid.class.js")
 
