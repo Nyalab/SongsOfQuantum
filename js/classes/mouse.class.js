@@ -23,6 +23,18 @@ var Mouse = Class.extend({
         $('body').off('mousedown', '#mouseSelection');
         $('body').off('mousemove', '#mouseSelection');
         $('body').off('mouseup', '#mouseSelection');
+
+        $('body').off('mousedown', '#minimap');
+        $('body').off('mousemove', '#minimap');
+        $('body').off('mouseup', '#minimap');
+
+        $('body').off('mousedown', '#dock');
+        $('body').off('mousemove', '#dock');
+        $('body').off('mouseup', '#dock');
+
+        $('body').off('mousedown', '#buttons');
+        $('body').off('mousemove', '#buttons');
+        $('body').off('mouseup', '#buttons');
 	},
 
 	setState: function(MouseBehaviorClass, options){
@@ -53,6 +65,17 @@ var Mouse = Class.extend({
         $('body').on('mousemove', '#mouseSelection', this.currentState.mouseMove);
 		$('body').on('mouseup', '#mouseSelection', this.currentState.releaseClick);
 
+        $('body').on('mousedown', '#minimap', this.currentState.viewport);
+        $('body').on('mousemove', '#minimap', this.currentState.mouseMove);
+        $('body').on('mouseup', '#minimap', this.currentState.releaseClick);
+
+        $('body').on('mousedown', '#dock', this.currentState.viewport);
+        $('body').on('mousemove', '#dock', this.currentState.mouseMove);
+        $('body').on('mouseup', '#dock', this.currentState.releaseClick);
+
+        $('body').on('mousedown', '#buttons', this.currentState.viewport);
+        $('body').on('mousemove', '#buttons', this.currentState.mouseMove);
+        $('body').on('mouseup', '#buttons', this.currentState.releaseClick);
 	},
 
 	beginSelection: function(x, y) {

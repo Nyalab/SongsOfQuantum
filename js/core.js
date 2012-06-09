@@ -5,6 +5,7 @@ var GameGlobals = {
     playerSide: null,
     mouse: new Mouse(),
     cursor: new Cursor(),
+    keyboard: new Keyboard(),
     gui:{
         mineralsDisplay: '#minerals_display',
         
@@ -20,11 +21,17 @@ var GameGlobals = {
 
 $(document).ready(function(){
     
+    // Remove scrollbars
     //$("#map").scrollbars();
     $('.scrollcontent').disableSelection();
-    
+
+    // Bind keyboards events
+    $(window).keydown(GameGlobals.keyboard.down);
+    $(window).keyup(GameGlobals.keyboard.up);
+
+    // Initialize game    
     var game = new Game();
-    
+    // And start it
     game.start();
     game.bindMouse();
     game.loop();

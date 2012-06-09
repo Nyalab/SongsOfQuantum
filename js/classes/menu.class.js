@@ -7,7 +7,8 @@ var Menu = Class.extend({
     setDimensions: function() {
         // Animate the spawning of the minimap
         // TODO Improve the effect of that
-        $("#minimap").height(0).css('display', 'block').animate({height: $("#dock").height() + "px"}, 2000);
+        var minimap_height = $("#minimap").height();
+        $("#minimap").height(0).css('display', 'block').animate({height: minimap_height + "px"}, 2000);
 
         // Calculate the space taken by the minimap and the buttons, then we set the space left to the dock
         // TODO Improve the effect of that
@@ -166,5 +167,9 @@ var Menu = Class.extend({
 
     clean: function() {
         $("#dock").empty();
+    },
+
+    execButton: function(pos) {
+        alert(pos);
     }
 });

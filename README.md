@@ -40,7 +40,8 @@ What's next?
   - Fire at will
   - Peacefull
 - Control groups
-  - To implement
+  - Add the rendering in mini-icons
+  - Add the ability to add in an existing control group
 - Collisions & Pathfinding
   - To implement
 
