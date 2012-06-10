@@ -17,17 +17,12 @@ var ComplexExplosion = Drawable.extend({
 	            expl.draw('map').appendTo(div);
 	        }
 
+	        GameGlobals.sound.play('explosion');
+
 	        setTimeout(function(){
 	            var explosion = new Explosion(drawable.x, drawable.y, duration, radius, strength);
 	            explosion.draw('map').appendTo(div);
 	        }, 0);
-
-
-	        var mySound = new buzz.sound( "sound/effects/explosion01", {
-			    formats: [ "mp3", "ogg"]
-			});
-
-			mySound.play();
 
             return div;
          });

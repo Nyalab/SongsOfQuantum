@@ -5,6 +5,7 @@ $LAB
 
    // Buzz
    .script('js/lib/buzz.js')
+   .script('js/classes/utils/sound.class.js')
 
    // Paintbrush image processing library
    .script("js/lib/paintbrush.common.js")
