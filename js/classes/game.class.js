@@ -1,46 +1,99 @@
 
 var Game = Class.extend({
-    __construct: function(){
-
+    __construct: function(players){
+        this.players = players;
     },
 
-    start: function(){
+    loadMap: function(mapUrl){
+        var __this = this;
+        $.ajax({
+            url: mapUrl,
+            dataType: 'json',
+            success: function(data){ 
+                __this.start(data) 
+            }
+        });
+    },
 
+    getRaceStartingUnits: function(race){
+        if(race == "terrestris"){
+            return {
+                miner: TerrestrisMiner,
+                commandCenter: TerrestrisDock
+            }
+        }
+        else if(race == "kriiv"){
+            return {
+                miner: KriivMiner,
+                commandCenter: KriivNest
+            }
+        }
+        else{
+            return {
+                miner: KriivMiner,
+                commandCenter: KriivNest
+            }
+        }
+    },
+
+    start: function(data){
         GameGlobals.gui.menu.setDimensions();
 
-        var side1 = new Side('player1', '#8B8D28');
-        var side2 = new Side('player2', '#550000');
-
-        GameGlobals.playerSide = side1;
-
-        side1.changeMinerals(500);
+        var sides = [];
+        for(var i in this.players){
+            sides[i] = new Side(this.players[i].id, this.players[i].color);
+            if(this.players[i].type == "human"){
+                GameGlobals.playerSide = sides[i];
+            }
+            sides[i].changeMinerals(data.startingRessources);
+        }
         
         var i;
         
-        $('#viewport').css('width', Map.miscellaneous.width + 'px');
-        $('#viewport').css('height', Map.miscellaneous.height + 'px');
+        $('#viewport').css('width', data.miscellaneous.width + 'px');
+        $('#viewport').css('height', data.miscellaneous.height + 'px');
 
         // Parallax init
-        $('#viewport').append('<div id="parallax" data-stellar-ratio="0.5" style="position: relative;">' + Map.background + '</div>');
+        $('#viewport').append('<div id="parallax" data-stellar-ratio="0.5" style="position: relative;">' + data.background + '</div>');
         $('#map').stellar();
 
-        for(i=0; i<Map.asteroids.length; i++){
-            var asteroid = new Asteroid('asteroid_' + i, Map.asteroids[i].x, Map.asteroids[i].y);
+        for(i=0; i<data.asteroids.length; i++){
+            var asteroid = new Asteroid('asteroid_' + i, data.asteroids[i].x, data.asteroids[i].y);
             asteroid.draw('map').appendTo(GameGlobals.viewport);
         }
         
-        for(i=0; i<Map.spawns.length; i++){
-            var nest = new KriivNest('building_' + i, Map.spawns[i].x, Map.spawns[i].y);
+        for(i=0; i<data.spawns.length; i++){
+            var units = this.getRaceStartingUnits(this.players[i].race);
+
+            var nest = new units.commandCenter('building_' + i, data.spawns[i].x, data.spawns[i].y);
             nest.draw('map').appendTo(GameGlobals.viewport);
-            nest.flag('controllable');
-            side1.add(nest);
+
+            if(i == 0){
+                nest.flag('controllable');
+                sides[i].add(nest);
+            }
+            else{
+                sides[i].add(nest);
+            }
+
+            
             GameGlobals.shipManager.register(nest);
             
-            for(var j=0; j < Map.spawns[i].miners.length; j++){
-                var miner = new KriivMiner('ship_' + j, Map.spawns[i].miners[j].x, Map.spawns[i].miners[j].y);
-                miner.flag('controllable');
-                miner.draw('map').appendTo(GameGlobals.viewport);;
-                side1.add(miner);
+            for(var j=0; j < data.spawns[i].miners.length; j++){
+                var miner = new units.miner('ship_' + i + '_' + j, data.spawns[i].miners[j].x, data.spawns[i].miners[j].y);
+                miner.draw('map').appendTo(GameGlobals.viewport);
+
+                if(GameGlobals.playerSide == sides[i]){
+                    miner.flag('controllable');
+                }
+
+                if(i == 0){
+                    sides[i].add(miner);
+                }
+                else{
+                    sides[i].add(miner);
+                }
+
                 GameGlobals.shipManager.register(miner);
             }
             

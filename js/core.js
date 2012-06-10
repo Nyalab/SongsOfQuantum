@@ -31,9 +31,24 @@ $(document).ready(function(){
     $(window).keyup(GameGlobals.keyboard.up);
 
     // Initialize game    
-    var game = new Game();
+    var game = new Game([
+        {
+            name: "Player 1",
+            id: Guid.generate(),
+            type: "human",
+            color: "#8B8D28",
+            race: "terrestris"
+        },
+        {
+            name: "Player 2",
+            id: Guid.generate(),
+            type: "AI",
+            color: "#550000",
+            race: "terrestris"
+        }
+    ]);
     // And start it
-    game.start();
+    game.loadMap('js/maps/rohnokdual.map.js');
     game.bindMouse();
     game.loop();
 });

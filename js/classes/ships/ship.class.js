@@ -59,7 +59,7 @@ var Ship = Entity.extend({
     
     setSprite: function(sprite){
         this._super(sprite);
-        this.getSide().colorize(this);
+        //this.getSide().colorize(this);
         processFilters();
     }
 });

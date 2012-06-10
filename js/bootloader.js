@@ -39,6 +39,8 @@ $LAB
    .script("js/classes/ships/kriivShip.class.js")
    .script("js/classes/ships/kriivHive.class.js")
    .script("js/classes/ships/kriivMiner.class.js")
+   .script("js/classes/ships/terrestrisShip.class.js")
+   .script("js/classes/ships/terrestrisMiner.class.js")
    .script("js/classes/ships/shipManager.class.js")
 
    // Weapons classes
@@ -49,6 +51,7 @@ $LAB
    // Building classes
    .script("js/classes/buildings/building.class.js")
    .script("js/classes/buildings/kriivNest.class.js")
+      .script("js/classes/buildings/terrestrisDock.class.js")
 
    // Side classes
    .script("js/classes/side.class.js")
@@ -64,10 +67,7 @@ $LAB
    .script("js/classes/mouseBehavior/mouseBehaviorPlaceBuilding.class.js")
 
    // GUI menu class
-   .script("js/classes/menu.class.js")
-
-   // Maps
-   .script("js/maps/rohnokdual.map.js").wait()
+   .script("js/classes/menu.class.js").wait()
 
    // Core 
    .script("js/core.js");

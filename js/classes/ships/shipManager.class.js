@@ -44,11 +44,11 @@ var ShipManager = Class.extend({
 
     doMouseSelect: function() {
         var selected;
-        selected = $("#" + GameGlobals.mouse.selectionId).collision(".ship");
+        selected = $("#" + GameGlobals.mouse.selectionId).collision(".ship.controllable");
         // If we have no ship selected, try with buildings
         if(selected.length == 0)
         {
-            selected = $("#" + GameGlobals.mouse.selectionId).collision(".building");
+            selected = $("#" + GameGlobals.mouse.selectionId).collision(".building.controllable");
             // If we have no ship and no building, try the asteroids
             if(selected.length == 0)
             {
