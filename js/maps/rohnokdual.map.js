@@ -29,7 +29,7 @@
         ]}
     ],
     
-    "background": "<div style=\"position: relative; width: 500px; height: 500px; background-image: url('images/maps/planet.jpg'); left: 125px; top: 125px\"></div>",
+    "background": "<div style=\"position: relative; width: 500px; height: 500px; background-image: url('images/maps/planet.jpg'); left: 182px; top: 111px\"></div>",
 
     "miscellaneous":{
         "maxPopulation": 100,

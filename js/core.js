@@ -37,7 +37,7 @@ $(document).ready(function(){
             id: Guid.generate(),
             type: "human",
             color: "#8B8D28",
-            race: "terrestris"
+            race: "kriiv"
         },
         {
             name: "Player 2",
