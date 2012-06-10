@@ -25,7 +25,7 @@ html, body{
 #header div { float: left; }
 
 .real-menu {
-    background: #76a02a;
+    background: #E2B41F;
     height: 20px;
     margin: 0 10px;
     padding: 0 10px;
@@ -51,7 +51,10 @@ html, body{
     position: fixed;
     bottom: 1px;
     height: 200px;
-    background: #E0DDD3;
+    background-image: url('../images/ui/menu-top.png');
+    background-repeat: repeat-x;
+    background-color: #222;
+    padding-top: 60px;
 }
 
 .selected{
@@ -85,12 +88,12 @@ html, body{
 }
 
 #buttons div:hover{
-    background-color: #222222;
+    background-color: #E2B41F;
     cursor: pointer;
 }
 
 .minimap, .ctrlgroups div, .dock, .buttons div {
-    background: #76A690;
+    background: #E0DDD3;
 }
 
 .minimap {
@@ -168,7 +171,6 @@ html, body{
 .entityInDockListDefault {
     width: 50px;
     height: 50px;
-    border: 1px dotted green;
     margin: 5px;
     float: left;
 }
@@ -202,26 +204,23 @@ html, body{
     width: 95%;
     height: 99%;
     margin: 0 auto;
-    border: 1px dotted red;
 }
 
 .entityInDockLeftSubContainer {
     float: left;
     width: 30%;
     height: 100%;
-    border: 1px dotted green;
 }
 
 .entityInDockRightSubContainer {
     float: left;
     width: 69.6%;
     height: 100%;
-    border: 1px dotted green;
 }
 
 .entityInDockRightSubContainer h1 {
     text-align: center;
-    color: #BE002C;
+    color: #D9702C;
     font-size: 24px;
     font-weight: bold;
     margin: 30px auto;
