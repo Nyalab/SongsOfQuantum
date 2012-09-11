@@ -11,8 +11,17 @@ class ServerAction
     clients = this.getClientAmount(roomId)
     if clients < this.maxRoomSize()
       socket.join(roomId)
+      this.sockets.in(roomId).emit('room-joined', {'id': socket.sessid})
     else 
-      throw new error.ServerError("Room " + roomId + " is full", error.code.roomFull);
-    
+      err = new error.ServerError("Room " + roomId + " is full", error.code.roomFull);
+      socket.emit('error', err.toObject())
+      socket.disconnect();
 
-module.exports = ServerAction
+  disconnect: (socket) ->
+    rooms = @sockets.manager.roomClients[socket.id]
+    this.sockets.in(room).emit('room-left', {'id': socket.sessid}) for room in rooms
+
+class Room 
+
+module.exports.ServerAction = ServerAction
+module.exports.Room = Room

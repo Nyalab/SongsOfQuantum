@@ -10,5 +10,4 @@ class ServerError extends Error
 
 module.exports.ServerError = ServerError
 module.exports.code = {
-	roomFull: 101
 }

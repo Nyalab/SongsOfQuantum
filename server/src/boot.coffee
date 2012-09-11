@@ -1,8 +1,8 @@
 # Including dependencies
 http    	   = require 'http'
 fs      	   = require 'fs'
-io 			   = require 'socket.io'
-ServerAction   = require './server'
+io 			     = require 'socket.io'
+server       = require './server'
 
 
 # We will serve this file when browsed.
@@ -16,14 +16,15 @@ network        = io.listen htmlEntryPoint;
 
 # On connection, we will send some data to the client.
 network.sockets.on 'connection', (socket) ->
+  # On initialize, we bind the socket to a room
   socket.on 'initialize', (data) ->
-  	action = new ServerAction network.sockets
-  	try
-  		action.joinRoom socket, data.roomId
-  		network.sockets.in(data.roomId).emit('room-joined', {})
-  	catch error
-  		socket.emit('room-deny', error.toObject())
-  		console.log(error)
+  	action = new server.ServerAction network.sockets
+  	action.joinRoom socket, data.roomId
+
+  # On disconnect, the room is left
+  socket.on 'disconnect', (data) ->
+    action = new server.ServerAction network.sockets
+    action.disconnect socket
 
 # Then we start the app.
 htmlEntryPoint.listen 80;

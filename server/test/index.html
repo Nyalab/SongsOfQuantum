@@ -1,7 +1,43 @@
-<script src="http://localhost/socket.io/socket.io.js"></script>
-<script>
-  var roomId = window.location.hash;
+<html>
+  <head>
+    <style>
+      body{
+        color: #090;
+        background-color: black;
+        font-family: arial;
+      }
+    </style>
+  </head>
+  <body>
 
-  var socket = io.connect('http://localhost');
-  socket.emit('initialize', {'roomId' : roomId})
-</script>
+    <div id="log">
+
+    </div>
+
+    <script src="http://localhost/socket.io/socket.io.js"></script>
+    <script>
+
+      function log(text){
+        document.getElementById('log').innerHTML = document.getElementById('log').innerHTML + '> ' + text + '<br />';
+      }
+
+      var roomId = window.location.hash;
+
+      var socket = io.connect('http://localhost');
+      socket.emit('initialize', {'roomId' : roomId})
+
+      socket.on('connect', function(data){
+        log('connected');
+      });
+
+      socket.on('error', function(data){
+        log('error: ' + data.message);
+      });
+
+      socket.on('disconnect', function(data){
+        log('disconnected');
+      });
+    </script>
+
+  </body>
+</html>

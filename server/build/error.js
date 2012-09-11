@@ -34,8 +34,6 @@
 
   module.exports.ServerError = ServerError;
 
-  module.exports.code = {
-    roomFull: 101
-  };
+  module.exports.code = {};
 
 }).call(this);
