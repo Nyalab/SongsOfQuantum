@@ -1,19 +1,18 @@
-# Including dependencies
-http    		= require('http')
-fs      		= require('fs')
-io 				= require('socket.io')
+error    = require './error'
 
-# We will serve this file when browsed.
-htmlEntryPoint 	= http.createServer (req, res) ->
-					fs.readFile '../test/index.html', 'utf-8', (error, content) ->
-						res.writeHead 200, {'Content-Type' : 'text/html'}
-						res.end content
+class ServerAction
+  maxRoomSize: () -> 2
 
-# All the other requests are delegated to socket.io
-server 			= io.listen app;
+  constructor: (@sockets) ->
 
-# On connection, we will send some data to the client.
-server.sockets.on 'connection', (socket) -> socket.emit 'news', { hello: 'world' }
+  getClientAmount: (roomId) -> @sockets.clients(roomId).length
 
-# Then we start the app.
-htmlEntryPoint.listen 80;
+  joinRoom: (socket, roomId) ->
+    clients = this.getClientAmount(roomId)
+    if clients < this.maxRoomSize()
+      socket.join(roomId)
+    else 
+      throw new error.ServerError("Room " + roomId + " is full", error.code.roomFull);
+    
+
+module.exports = ServerAction
