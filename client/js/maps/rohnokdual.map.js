@@ -29,11 +29,11 @@
         ]}
     ],
     
-    "background": "<div style=\"position: relative; width: 500px; height: 500px; background-image: url('images/maps/planet.jpg'); left: 182px; top: 111px\"></div>",
+    "background": "<div style=\"position: relative; width: 500px; height: 500px; background-image: url('images/maps/planet.jpg'); margin-left: 182px; top: 111px\"><img src=\"images/ui/logo.png\"  style=\"position: absolute; left: 50%; top: 50%; margin-left:-137px; margin-top:-79px;\"/></div>",
 
     "miscellaneous":{
         "maxPopulation": 100,
-        "width": 2500,
-        "height": 1000
+        "width": 860,
+        "height": 700
     }
 }
