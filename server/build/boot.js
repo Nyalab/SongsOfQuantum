@@ -21,6 +21,11 @@
 
   network = io.listen(htmlEntryPoint);
 
+  network.set('authorization', function(data, accept) {
+    data.sessionId = Math.round(Math.random() * 10000);
+    return accept(null, true);
+  });
+
   network.sockets.on('connection', function(socket) {
     socket.on('initialize', function(data) {
       var action;

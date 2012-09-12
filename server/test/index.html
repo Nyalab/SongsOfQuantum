@@ -30,6 +30,14 @@
         log('connected');
       });
 
+      socket.on('room-joined', function(data){
+        log('Room joined by ' + data['author-id'] + ' at ' + data['served-at']);
+      });
+
+      socket.on('room-left', function(data){
+        log('Room left by ' + data['author-id'] + ' at ' + data['served-at']);
+      });
+
       socket.on('error', function(data){
         log('error: ' + data.message);
       });

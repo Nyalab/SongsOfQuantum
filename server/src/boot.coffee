@@ -5,6 +5,7 @@ io 			     = require 'socket.io'
 server       = require './server'
 
 
+
 # We will serve this file when browsed.
 htmlEntryPoint = http.createServer (req, res) ->
 					fs.readFile '../test/index.html', 'utf-8', (error, content) ->
@@ -13,6 +14,11 @@ htmlEntryPoint = http.createServer (req, res) ->
 
 # All the other requests are delegated to socket.io
 network        = io.listen htmlEntryPoint;
+
+network.set 'authorization', (data, accept) ->
+  data.sessionId = Math.round(Math.random()*10000)
+  accept(null, true);
+
 
 # On connection, we will send some data to the client.
 network.sockets.on 'connection', (socket) ->
