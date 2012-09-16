@@ -6,6 +6,10 @@
         background-color: black;
         font-family: arial;
       }
+
+      a{
+        color: white;
+      }
     </style>
   </head>
   <body>
@@ -17,8 +21,29 @@
     <script src="http://localhost/socket.io/socket.io.js"></script>
     <script>
 
+      var Globals = {
+        socket: null
+      }
+
       function log(text){
         document.getElementById('log').innerHTML = document.getElementById('log').innerHTML + '> ' + text + '<br />';
+      }
+
+      function tagTime(message){
+        message['sent-at'] = (new Date()).getTime();
+        return message;
+      }
+
+      function latency(message){
+        var emitTime;
+        if(typeof(message['sent-at']) != 'undefined'){
+          emitTime = message['sent-at'];
+        }
+        else{
+          emitTime = message['served-at'];
+        }
+
+        return (new Date()).getTime() - emitTime;
       }
 
       var roomId = window.location.hash;
@@ -26,26 +51,47 @@
       var socket = io.connect('http://localhost');
       socket.emit('initialize', {'roomId' : roomId})
 
+      Globals.socket = socket;
+
       socket.on('connect', function(data){
         log('connected');
+
+        setInterval(function(){
+          socket.emit('sync', tagTime({}))
+        }, 5000);
+
       });
 
       socket.on('room-joined', function(data){
-        log('Room joined by ' + data['author-id'] + ' at ' + data['served-at']);
+        log('Room joined by ' + data['author-id'] + ' at ' + data['served-at'] + ' (latency: ' + latency(data) + 'ms)');
       });
 
       socket.on('room-left', function(data){
-        log('Room left by ' + data['author-id'] + ' at ' + data['served-at']);
+        log('Room left by ' + data['author-id'] + ' at ' + data['served-at'] + ' (latency: ' + latency(data) + 'ms)');
+      });
+
+      socket.on('sync', function(data){
+        log('Synced from ' + data['author-id'] + ' at ' + data['sent-at'] + ' (latency: ' + latency(data) + 'ms)');
       });
 
       socket.on('error', function(data){
         log('error: ' + data.message);
       });
 
+      socket.on('start-game', function(data){
+        log('<b>Game starting</b>');
+      });
+
       socket.on('disconnect', function(data){
         log('disconnected');
       });
+
+      function openGame(){
+        Globals.socket.emit('open-game', tagTime({ map: 'rohnok' }));
+        console.log('go');
+      }
     </script>
 
+    <a onclick="openGame()">Open game</a>
   </body>
 </html>
