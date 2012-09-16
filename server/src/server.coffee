@@ -22,17 +22,22 @@ class NetworkLayer
     if(include is yes)
       this.socket.emit(name, data)
 
-  sendRoomJoined: ()                 -> 
-    this.broadcast('room-joined', this.tagMessage({}), false)
+  sendRoomJoined: (clients)                 -> 
+    this.broadcast('room-joined', this.tagMessage({ clients: clients }), true)
 
-  sendRoomLeft:   ()                 -> 
-    this.broadcast('room-left',   this.tagMessage({}), false)
+  sendRoomLeft:   (clients)                 -> 
+    this.broadcast('room-left',   this.tagMessage({ clients: clients }), true)
 
   sendSync:    (data)                ->
     this.broadcast('sync', this.tagMessage(data), false)
 
+  sendGameState: (state) ->
+    this.broadcast('game-state',   this.tagMessage({ state: state }), true)
+
   sendStartGame: () ->
     this.broadcast('start-game', this.tagMessage({}), true)
+
+
 
 class ServerAction
   maxRoomSize: () -> 2
@@ -46,17 +51,20 @@ class ServerAction
 
   joinRoom: (socket, roomId) ->
     clients = this.getClientAmount(roomId)
+    networkLayer = new NetworkLayer(socket, this.sockets)
     if clients < this.maxRoomSize()
       if clients == 0
         this.server.startGame(roomId)
         socket.join(roomId)
+        networkLayer.sendRoomJoined(clients + 1)
+        networkLayer.sendGameState(GameState.PREPARING)
       else if this.server.getGame(roomId).getState() is GameState.WAITING
         socket.join(roomId)
-        networkLayer = new NetworkLayer(socket, this.sockets)
-        networkLayer.sendRoomJoined()
+        networkLayer.sendRoomJoined(clients + 1)
         if clients + 1 == this.maxRoomSize()
           this.server.getGame(roomId).setState(GameState.PLAYING)
           networkLayer.sendStartGame()
+          networkLayer.sendGameState(GameState.PLAYING)
       else
         err = new error.ServerError("Game not ready", error.code.gameNotReady);
         socket.emit('error', err.toObject())
@@ -71,6 +79,7 @@ class ServerAction
     roomId  = networkLayer.getClientRoom()
     this.server.getGame(roomId).setState(GameState.WAITING)
     this.server.getGame(roomId).setMap(map)
+    networkLayer.sendGameState(GameState.WAITING)
 
   synchronize: (socket, data) ->
     networkLayer = new NetworkLayer(socket, this.sockets)
@@ -78,12 +87,13 @@ class ServerAction
 
   disconnect:  (socket) ->
     networkLayer = new NetworkLayer(socket, this.sockets)
-    networkLayer.sendRoomLeft()
-    networkLayer = new NetworkLayer(socket, this.sockets)
     roomId  = networkLayer.getClientRoom()
     clients = this.getClientAmount(roomId)
+    networkLayer.sendRoomLeft(clients)
     if clients == 0
       this.server.endGame(roomId)
+
+
 
 class Game
   constructor: () ->
@@ -98,6 +108,8 @@ class Game
 
   setMap: (map) ->
     this.map = map
+
+
 
 class Server
   constructor: () ->

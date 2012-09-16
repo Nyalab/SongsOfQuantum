@@ -10,6 +10,30 @@
       a{
         color: white;
       }
+
+      #log{
+        width: 500px;
+        height: 200px;
+        border: 1px solid #090;
+        padding: 5px;
+        overflow: auto;
+      }
+
+      #launch-game{
+        width: 500px;
+        background-color: #008;
+        padding: 6px;
+        text-align: center;
+        margin-top: 5px;
+      }
+
+      #status-bar{
+        height: 20px;
+        width: 500px;
+        padding: 6px;
+        margin-top: 5px;
+        text-align: center;
+      }
     </style>
   </head>
   <body>
@@ -18,7 +42,19 @@
 
     </div>
 
-    <script src="http://localhost/socket.io/socket.io.js"></script>
+    <div id="status-bar" style="background-color: #330">
+      <span id="network-state">_</span> - 
+      <span id="player-amount">_</span> - 
+      <span id="game-state">_</span> -
+      <span id="latency">_</span>
+    </div>
+
+    <div id="launch-game" style="display: none">
+      Launch
+    </div>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js"></script>
     <script>
 
       var Globals = {
@@ -38,12 +74,12 @@
         var emitTime;
         if(typeof(message['sent-at']) != 'undefined'){
           emitTime = message['sent-at'];
+          $('#latency').html('ping ' + ((new Date()).getTime() - emitTime) + 'ms');
         }
-        else{
+        else if(typeof(message['served-at']) != 'undefined'){
           emitTime = message['served-at'];
+          $('#latency').html('ping ' + ((new Date()).getTime() - emitTime) + 'ms');
         }
-
-        return (new Date()).getTime() - emitTime;
       }
 
       var roomId = window.location.hash;
@@ -54,44 +90,56 @@
       Globals.socket = socket;
 
       socket.on('connect', function(data){
-        log('connected');
+        $('#network-state').html('connected');
+        $('#launch-game').show();
+        latency(data);
+      });
 
-        setInterval(function(){
-          socket.emit('sync', tagTime({}))
-        }, 5000);
-
+      socket.on('disconnect', function(data){
+        $('#network-state').html('disconnected');
+        $('#launch-game').hide();
+        latency(data);
       });
 
       socket.on('room-joined', function(data){
-        log('Room joined by ' + data['author-id'] + ' at ' + data['served-at'] + ' (latency: ' + latency(data) + 'ms)');
+        $('#player-amount').html(data.clients + ' player(s)')
+        latency(data);
       });
 
       socket.on('room-left', function(data){
-        log('Room left by ' + data['author-id'] + ' at ' + data['served-at'] + ' (latency: ' + latency(data) + 'ms)');
-      });
-
-      socket.on('sync', function(data){
-        log('Synced from ' + data['author-id'] + ' at ' + data['sent-at'] + ' (latency: ' + latency(data) + 'ms)');
+        $('#player-amount').html(data.clients + ' player(s)')
+        latency(data);
       });
 
       socket.on('error', function(data){
         log('error: ' + data.message);
+        latency(data);
       });
 
       socket.on('start-game', function(data){
-        log('<b>Game starting</b>');
+        latency(data);
       });
 
-      socket.on('disconnect', function(data){
-        log('disconnected');
+      socket.on('game-state', function(data){
+        if(data.state == 1){
+          $('#launch-game').hide();
+          $('#game-state').html('waiting for players');
+        }   
+        else if (data.state == 2){
+          $('#launch-game').hide();
+          $('#game-state').html('playing');
+        }
+        else{
+          $('#launch-game').show();
+          $('#game-state').html('setting the game');
+        }
+          
+        latency(data);
       });
 
-      function openGame(){
+      $('#launch-game').click(function(){
         Globals.socket.emit('open-game', tagTime({ map: 'rohnok' }));
-        console.log('go');
-      }
+      });
     </script>
-
-    <a onclick="openGame()">Open game</a>
   </body>
 </html>

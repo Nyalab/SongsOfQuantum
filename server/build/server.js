@@ -39,16 +39,26 @@
       }
     };
 
-    NetworkLayer.prototype.sendRoomJoined = function() {
-      return this.broadcast('room-joined', this.tagMessage({}), false);
+    NetworkLayer.prototype.sendRoomJoined = function(clients) {
+      return this.broadcast('room-joined', this.tagMessage({
+        clients: clients
+      }), true);
     };
 
-    NetworkLayer.prototype.sendRoomLeft = function() {
-      return this.broadcast('room-left', this.tagMessage({}), false);
+    NetworkLayer.prototype.sendRoomLeft = function(clients) {
+      return this.broadcast('room-left', this.tagMessage({
+        clients: clients
+      }), true);
     };
 
     NetworkLayer.prototype.sendSync = function(data) {
       return this.broadcast('sync', this.tagMessage(data), false);
+    };
+
+    NetworkLayer.prototype.sendGameState = function(state) {
+      return this.broadcast('game-state', this.tagMessage({
+        state: state
+      }), true);
     };
 
     NetworkLayer.prototype.sendStartGame = function() {
@@ -77,17 +87,20 @@
     ServerAction.prototype.joinRoom = function(socket, roomId) {
       var clients, err, networkLayer;
       clients = this.getClientAmount(roomId);
+      networkLayer = new NetworkLayer(socket, this.sockets);
       if (clients < this.maxRoomSize()) {
         if (clients === 0) {
           this.server.startGame(roomId);
-          return socket.join(roomId);
+          socket.join(roomId);
+          networkLayer.sendRoomJoined(clients + 1);
+          return networkLayer.sendGameState(GameState.PREPARING);
         } else if (this.server.getGame(roomId).getState() === GameState.WAITING) {
           socket.join(roomId);
-          networkLayer = new NetworkLayer(socket, this.sockets);
-          networkLayer.sendRoomJoined();
+          networkLayer.sendRoomJoined(clients + 1);
           if (clients + 1 === this.maxRoomSize()) {
             this.server.getGame(roomId).setState(GameState.PLAYING);
-            return networkLayer.sendStartGame();
+            networkLayer.sendStartGame();
+            return networkLayer.sendGameState(GameState.PLAYING);
           }
         } else {
           err = new error.ServerError("Game not ready", error.code.gameNotReady);
@@ -106,7 +119,8 @@
       networkLayer = new NetworkLayer(socket, this.sockets);
       roomId = networkLayer.getClientRoom();
       this.server.getGame(roomId).setState(GameState.WAITING);
-      return this.server.getGame(roomId).setMap(map);
+      this.server.getGame(roomId).setMap(map);
+      return networkLayer.sendGameState(GameState.WAITING);
     };
 
     ServerAction.prototype.synchronize = function(socket, data) {
@@ -118,10 +132,9 @@
     ServerAction.prototype.disconnect = function(socket) {
       var clients, networkLayer, roomId;
       networkLayer = new NetworkLayer(socket, this.sockets);
-      networkLayer.sendRoomLeft();
-      networkLayer = new NetworkLayer(socket, this.sockets);
       roomId = networkLayer.getClientRoom();
       clients = this.getClientAmount(roomId);
+      networkLayer.sendRoomLeft(clients);
       if (clients === 0) {
         return this.server.endGame(roomId);
       }
