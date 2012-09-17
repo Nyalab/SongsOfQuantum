@@ -95,7 +95,7 @@ var Mouse = Class.extend({
 
         var Xdiff = GameGlobals.cursor.mouseX - GameGlobals.mouse.originalSelectionX;
         var Ydiff = GameGlobals.cursor.mouseY - GameGlobals.mouse.originalSelectionY;
-        
+
         if(Xdiff > 0)
         {
             $("#" + GameGlobals.mouse.selectionId).css('left', GameGlobals.mouse.originalSelectionX);

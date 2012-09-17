@@ -9,7 +9,7 @@ var GameGlobals = {
     keyboard: new Keyboard(),
     gui:{
         mineralsDisplay: '#minerals_display',
-        
+
         unitLife: '#unit_life',
         unitTitle: '#unit_title',
         unitProductionQueue: '#queue_production',
@@ -21,16 +21,15 @@ var GameGlobals = {
 };
 
 $(document).ready(function(){
-    
+
     // Remove scrollbars
     //$("#map").scrollbars();
     $('.scrollcontent').disableSelection();
 
     // Bind keyboards events
-    $(window).keydown(GameGlobals.keyboard.down);
-    $(window).keyup(GameGlobals.keyboard.up);
+    GameGlobals.keyboard.init();
 
-    // Initialize game    
+    // Initialize game
     var game = new Game([
         {
             name: "Player 1",

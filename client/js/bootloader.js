@@ -60,6 +60,7 @@ $LAB
    .script("js/classes/game.class.js")
 
    // Mouse & cursor class
+   .script("js/lib/mousetrap.js")
    .script("js/classes/cursor.class.js")
    .script("js/classes/mouse.class.js")
    .script("js/classes/keyboard.class.js")
@@ -69,5 +70,5 @@ $LAB
    // GUI menu class
    .script("js/classes/menu.class.js").wait()
 
-   // Core 
+   // Core
    .script("js/core.js");

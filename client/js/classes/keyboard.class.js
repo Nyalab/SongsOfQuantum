@@ -1,9 +1,5 @@
 var Keyboard = Class.extend({
 
-	ctrlPressed: false,
-	altPressed: false,
-	shiftPressed: false,
-
 	ctrlGroup0: [],
 	ctrlGroup1: [],
 	ctrlGroup2: [],
@@ -15,111 +11,126 @@ var Keyboard = Class.extend({
 	ctrlGroup8: [],
 	ctrlGroup9: [],
 
-	down: function(e) {
-        switch (e.keyCode) {
-            case 65: // a
-                GameGlobals.gui.menu.execButton('11');
-                break;
-            case 90: // z
-                GameGlobals.gui.menu.execButton('12');
-                break;
-            case 69: // e
-                GameGlobals.gui.menu.execButton('13');
-                break;
-            case 81: // q
-                GameGlobals.gui.menu.execButton('21');
-                break;
-            case 83: // s
-                GameGlobals.gui.menu.execButton('22');
-                break;
-            case 68: // d
-                GameGlobals.gui.menu.execButton('23');
-                break;
-            case 87: // w
-                GameGlobals.gui.menu.execButton('31');
-                break;
-            case 88: // x
-                GameGlobals.gui.menu.execButton('32');
-                break;
-            case 67: // c
-                GameGlobals.gui.menu.execButton('33');
-                break;
-            case 16: // shift	
-            	GameGlobals.keyboard.shiftPressed = true;
-            	break;
-            case 18: // alt	
-            	GameGlobals.keyboard.altPressed = true;
-            	break;	
-          	case 49: // 1
-          		if(GameGlobals.keyboard.altPressed) {
-          			GameGlobals.keyboard.createCtrlGroup(1);
-          		}
-          		else {
-          			GameGlobals.keyboard.retrieveCtrlGroup(1);
-          		}
-            	break;	
-          	case 50: // 2
-          		if(GameGlobals.keyboard.altPressed) {
-          			GameGlobals.keyboard.createCtrlGroup(2);
-          		}
-          		else {
-          			GameGlobals.keyboard.retrieveCtrlGroup(2);
-          		}
-            	break;	
-          	case 51: // 3
-          		if(GameGlobals.keyboard.altPressed) {
-          			GameGlobals.keyboard.createCtrlGroup(3);
-          		}
-          		else {
-          			GameGlobals.keyboard.retrieveCtrlGroup(3);
-          		}
-            	break;	
-        }
-	},
+  init: function() {
+    Mousetrap.bind('a', function() {
+      GameGlobals.gui.menu.execButton('11');
+      return false;
+    });
+    Mousetrap.bind('z', function() {
+      GameGlobals.gui.menu.execButton('12');
+      return false;
+    });
+    Mousetrap.bind('e', function() {
+      GameGlobals.gui.menu.execButton('13');
+      return false;
+    });
+    Mousetrap.bind('q', function() {
+      GameGlobals.gui.menu.execButton('21');
+      return false;
+    });
+    Mousetrap.bind('s', function() {
+      GameGlobals.gui.menu.execButton('22');
+      return false;
+    });
+    Mousetrap.bind('d', function() {
+      GameGlobals.gui.menu.execButton('23');
+      return false;
+    });
+    Mousetrap.bind('w', function() {
+      GameGlobals.gui.menu.execButton('31');
+      return false;
+    });
+    Mousetrap.bind('x', function() {
+      GameGlobals.gui.menu.execButton('32');
+      return false;
+    });
+    Mousetrap.bind('c', function() {
+      GameGlobals.gui.menu.execButton('33');
+      return false;
+    });
 
-	up: function(e) {
-        switch (e.keyCode) {
-            case 65: // a
-                GameGlobals.gui.menu.execButton('11');
-                break;
-            case 90: // z
-                GameGlobals.gui.menu.execButton('12');
-                break;
-            case 69: // e
-                GameGlobals.gui.menu.execButton('13');
-                break;
-            case 81: // q
-                GameGlobals.gui.menu.execButton('21');
-                break;
-            case 83: // s
-                GameGlobals.gui.menu.execButton('22');
-                break;
-            case 68: // d
-                GameGlobals.gui.menu.execButton('23');
-                break;
-            case 87: // w
-                GameGlobals.gui.menu.execButton('31');
-                break;
-            case 88: // x
-                GameGlobals.gui.menu.execButton('32');
-                break;
-            case 67: // c
-                GameGlobals.gui.menu.execButton('33');
-                break;
-            case 16: // shift	
-            	GameGlobals.keyboard.shiftPressed = false;
-            	break;
-            case 18: // alt	
-            	GameGlobals.keyboard.altPressed = false;
-            	break;
-            case 49: // 1
-            case 50: // 2
-            case 51: // 3
-            	GameGlobals.keyboard.altPressed = false;
-            	GameGlobals.keyboard.shiftPressed = false;
-            	break;
-        }
-	},
+    Mousetrap.bind('ctrl+1', function() {
+      GameGlobals.keyboard.createCtrlGroup(1);
+      return false;
+    });
+    Mousetrap.bind('ctrl+2', function() {
+      GameGlobals.keyboard.createCtrlGroup(2);
+      return false;
+    });
+    Mousetrap.bind('ctrl+3', function() {
+      GameGlobals.keyboard.createCtrlGroup(3);
+      return false;
+    });
+    Mousetrap.bind('ctrl+4', function() {
+      GameGlobals.keyboard.createCtrlGroup(4);
+      return false;
+    });
+    Mousetrap.bind('ctrl+5', function() {
+      GameGlobals.keyboard.createCtrlGroup(5);
+      return false;
+    });
+    Mousetrap.bind('ctrl+6', function() {
+      GameGlobals.keyboard.createCtrlGroup(6);
+      return false;
+    });
+    Mousetrap.bind('ctrl+7', function() {
+      GameGlobals.keyboard.createCtrlGroup(7);
+      return false;
+    });
+    Mousetrap.bind('ctrl+8', function() {
+      GameGlobals.keyboard.createCtrlGroup(8);
+      return false;
+    });
+    Mousetrap.bind('ctrl+9', function() {
+      GameGlobals.keyboard.createCtrlGroup(9);
+      return false;
+    });
+    Mousetrap.bind('ctrl+0', function() {
+      GameGlobals.keyboard.createCtrlGroup(0);
+      return false;
+    });
+
+    Mousetrap.bind(['&', '1'], function() {
+      GameGlobals.keyboard.retrieveCtrlGroup(1);
+      return false;
+    });
+    Mousetrap.bind(['é', '2'], function() {
+      GameGlobals.keyboard.retrieveCtrlGroup(2);
+      return false;
+    });
+    Mousetrap.bind(['"', '3'], function() {
+      GameGlobals.keyboard.retrieveCtrlGroup(3);
+      return false;
+    });
+    Mousetrap.bind(["'", '4'], function() {
+      GameGlobals.keyboard.retrieveCtrlGroup(4);
+      return false;
+    });
+    Mousetrap.bind(['(', '5'], function() {
+      GameGlobals.keyboard.retrieveCtrlGroup(5);
+      return false;
+    });
+    Mousetrap.bind(['-', '6'], function() {
+      GameGlobals.keyboard.retrieveCtrlGroup(6);
+      return false;
+    });
+    Mousetrap.bind(['è', '7'], function() {
+      GameGlobals.keyboard.retrieveCtrlGroup(7);
+      return false;
+    });
+    Mousetrap.bind(['_', '8'], function() {
+      GameGlobals.keyboard.retrieveCtrlGroup(8);
+      return false;
+    });
+    Mousetrap.bind(['ç', '9'], function() {
+      GameGlobals.keyboard.retrieveCtrlGroup(9);
+      return false;
+    });
+    Mousetrap.bind(['à', '0'], function() {
+      GameGlobals.keyboard.retrieveCtrlGroup(0);
+      return false;
+    });
+  },
 
 	createCtrlGroup: function(group) {
 		str = "ctrlGroup" + group;
@@ -127,6 +138,7 @@ var Keyboard = Class.extend({
 	},
 
 	retrieveCtrlGroup: function(group) {
+    console.log(GameGlobals.keyboard)
 		str = "ctrlGroup" + group;
 		if(GameGlobals.keyboard[str].length) {
 			$(".selected").removeClass('selected');
