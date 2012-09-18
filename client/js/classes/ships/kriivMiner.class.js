@@ -1,55 +1,86 @@
 
 var KriivMiner = KriivShip.extend({
-   
+
    __construct: function(id, x, y){
-       
+
        this.properties = {
-            name: "Miner",
-            life: 15,
-            rotationSpeed: 50,
-            advanceSpeed: 1,
-            image: 'images/kriiv/miner.png',
-            icon: 'images/kriiv/miner_menu.png',
-            weapon: {
-                life: 20,
-                image: 'images/kriiv/weapon.png',
-                advanceSpeed: 1,
-                rotationSpeed: 2,
-                range: 20,
-                reloadTime: 60,
-                damage: 1
-            },
-            mining:{
-                range: 15,
-                capacity: 5,
-                cooldown: 60,
-                current: 0,
-                lastAsteroid: null,
-                depositPoint: null
-            },
-            building: {
+          name: "Miner",
+          life: 15,
+          rotationSpeed: 50,
+          advanceSpeed: 1,
+          image: 'images/kriiv/miner.png',
+          icon: 'images/kriiv/miner_menu.png',
+          weapon: {
+              life: 20,
+              image: 'images/kriiv/weapon.png',
+              advanceSpeed: 1,
+              rotationSpeed: 2,
+              range: 20,
+              reloadTime: 60,
+              damage: 1
+          },
+          mining:{
+              range: 15,
+              capacity: 5,
+              cooldown: 60,
+              current: 0,
+              lastAsteroid: null,
+              depositPoint: null
+          },
+          building: {
+            range: 30
+          },
+          deposit:{
               range: 30
-            },
-            deposit:{
-                range: 30
-            },
-            actions:{
-                MOVE: this.processMove,
-                ATTACK: this.processAttack,
-                GATHER: this.processGather,
-                DEPOSIT: this.processDeposit,
-                PLACE_COMMAND_CENTER: this.processPlaceCommandCenter,
-                BUILD: this.processBuild
-            }
-        };
-       
-        this.menu = [
-          {
-              slot: '#menu_slot_01',
-              icon: 'images/kriiv/commandcenter.png',
-              command: 'PLACE_COMMAND_CENTER'
+          },
+          actions: {
+              MOVE: this.processMove,
+              HOLD: this.processMove,
+              ATTACK: this.processAttack,
+              GATHER: this.processGather,
+              DEPOSIT: this.processDeposit,
+              PLACE_COMMAND_CENTER: this.processPlaceCommandCenter,
+              BUILD: this.processBuild
           }
-        ];
+        };
+
+        this.menu = [];
+        this.menu[11] = {
+          slot: '#menu_slot_11',
+          type: 'collective',
+          icon: 'images/kriiv/commandcenter.png',
+          command: 'MOVE'
+        };
+        this.menu[12] = {
+          slot: '#menu_slot_12',
+          type: 'collective',
+          icon: 'images/kriiv/commandcenter.png',
+          command: 'HOLD'
+        };
+        this.menu[13] = {
+          slot: '#menu_slot_13',
+          type: 'collective',
+          icon: 'images/kriiv/commandcenter.png',
+          command: 'ATTACK'
+        };
+        this.menu[21] = {
+          slot: '#menu_slot_21',
+          type: 'collective',
+          icon: 'images/kriiv/commandcenter.png',
+          command: 'GATHER'
+        };
+        this.menu[22] = {
+          slot: '#menu_slot_22',
+          type: 'collective',
+          icon: 'images/kriiv/commandcenter.png',
+          command: 'DEPOSIT'
+        };
+        this.menu[41] = {
+          slot: '#menu_slot_31',
+          type: 'unique',
+          icon: 'images/kriiv/commandcenter.png',
+          command: 'PLACE_COMMAND_CENTER'
+        };
 
        this._super(id, x, y);
        this.flag('kriiv');

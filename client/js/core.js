@@ -26,9 +26,6 @@ $(document).ready(function(){
     //$("#map").scrollbars();
     $('.scrollcontent').disableSelection();
 
-    // Bind keyboards events
-    GameGlobals.keyboard.init();
-
     // Initialize game
     var game = new Game([
         {

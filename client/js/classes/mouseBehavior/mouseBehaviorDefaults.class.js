@@ -110,11 +110,9 @@ var MouseBehaviorDefaults = Class.extend({
 	            break;
 	        case 3:
 	            GameGlobals.cursor.clickEffect(e);
-	            
 	            var localX = e.pageX - $(GameGlobals.viewport).offset().left;
 	            var localY = e.pageY - $(GameGlobals.viewport).offset().top;
-	            
-	            
+
 	            GameGlobals.shipManager.applyToEach(function(){
 	                var ship = $(this).data('binded-class');
 

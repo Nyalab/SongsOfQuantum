@@ -2,6 +2,10 @@ var Menu = Class.extend({
     __construct: function(){
         this.selection = null;
         this.current = null;
+        this.buttons = {
+            prefix: "menu_slot_",
+            allowed: [11, 12, 13, 21, 22, 23, 31, 32, 33]
+        }
     },
 
     setDimensions: function() {
@@ -70,7 +74,7 @@ var Menu = Class.extend({
                     progress = Math.round(100 * progress / this.current.productionQueue[i].duration);
                     progress = progress + "%";
                 }
-                
+
                 list += "<div class=\"queue_production_item\">";
                 list += "<div>";
                 list += "<img src=\"" + this.current.productionQueue[i].unit.properties.icon + "\" />";
@@ -78,15 +82,15 @@ var Menu = Class.extend({
                 list += progress;
                 list += "</div>"; 
             }
-            
+
             $(GameGlobals.gui.unitProductionQueue).html(list);
-            
+
         }
         else{
             $(GameGlobals.gui.unitProductionQueue).html('');
         }
     },
-    
+
     clear: function(){
         this.setCurrent(null);
         this.updateUnitTitle();
@@ -96,13 +100,13 @@ var Menu = Class.extend({
             $(GameGlobals.gui.unitMenuSlot.replace('{id}', (i < 10 ? '0': '') + i)).html('');
         }
     },
-    
+
     applySelection: function(selection){
-        this.clear();
+        //this.clear();
         this.selection = selection;
         for(var i=0; i < selection.length; i++){
             var unit = this.selection.eq(i).data('binded-class');
-            
+
             this.setCurrent(unit);
             this.updateUnitTitle();
             this.updateUnitLife();
@@ -115,11 +119,11 @@ var Menu = Class.extend({
             }
         }
     },
-    
+
     switchMenu: function(){
-        
+
     },
-    
+
     apply: function(items){
         for(var i=0; i < items.length; i++){
             $(items[i].slot).html('<img src="'+items[i].icon+'" />');
@@ -137,6 +141,7 @@ var Menu = Class.extend({
         }
     },
 
+    // Once all ships are flagged with the selected class, the function automatically renders the dock and the buttons related
     renderSelected: function() {
         this.clean();
 
@@ -144,6 +149,8 @@ var Menu = Class.extend({
 
         var ship = null;
         var tpl = "";
+
+        // Render in dock
         if(selected.length == 1)
         {
             ship = selected.data('binded-class');
@@ -164,6 +171,32 @@ var Menu = Class.extend({
 
             container.appendTo($("#dock"));
         }
+
+        // Render order in the buttons section
+        // TODO implement that : main_unit must be the most important unit (and the one with more mana for example), for now, just the first of the selection
+        var main_unit = selected.first();
+        var order = null;
+        var menu = main_unit.data('binded-class').menu;
+        for(var order_key in menu)
+        {
+            order = menu[order_key];
+            if($.inArray(parseInt(order_key),this.buttons.allowed) < 0) {
+                throw "The button you want to assign at place " + order_key + " for the " + order.command + " command is not allowed or does not exist";
+                return false;
+            }
+
+            // TODO implement other methods than "icon" : for example, an html tag with a css class to create css animations / vectorisation
+            var button_container = null;
+            if(typeof order.icon != 'undefined')
+            {
+                button_container = $("<img/>", {
+                    'src': order.icon
+                });
+            }
+
+            button_container.appendTo($("#" + this.buttons.prefix + order_key));
+        }
+
     },
 
     clean: function() {

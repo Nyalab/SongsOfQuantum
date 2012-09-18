@@ -61,33 +61,37 @@ html, body{
     border: 1px dotted green;
 }
 
-#buttons{
+.buttons{
     float: right;
     width: 198px;
     height: 201px;
 }
 
-#buttons div {
+.buttons div {
+    -webkit-border-radius: .8em; 
+    -moz-border-radius: .8em;
+    border-radius: .8em;
+}
+
+.buttons > div {
     width: 62px;
     height: 62px;
 
     cursor: pointer;
-    -webkit-border-radius: .8em; 
-    -moz-border-radius: .8em;
-    border-radius: .8em;
 
     float: left;
     margin-top: 3px;
     margin-right: 3px;
+    position: relative;
 }
 
-#buttons div:active {
+.buttons div:active {
     position: relative;
     top: 1px;
     left: 1px;
 }
 
-#buttons div:hover{
+.buttons div:hover{
     background-color: #E2B41F;
     cursor: pointer;
 }
@@ -124,7 +128,8 @@ html, body{
     position: relative;
 }
 
-.ctrlgroups div div {
+.ctrlgroups div div,
+.buttons div div {
     width: 15px;
     height: 15px;
     font-size: 9px;
@@ -135,6 +140,7 @@ html, body{
     bottom: 0;
     border-top: 1px solid black;
     border-left: 1px solid black;
+    text-transform: uppercase;
 }
 
 

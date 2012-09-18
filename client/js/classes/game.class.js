@@ -111,6 +111,7 @@ var Game = Class.extend({
     },
 
     bindMouse: function(){
+        GameGlobals.keyboard.init();
         GameGlobals.mouse.setState(null);
     }
 });

@@ -4,9 +4,9 @@ var ShipManager = Class.extend({
         this.ships = [];
         this.pickMode = false;
     },
-    
+
     register: function(ship){
-    
+
         for(var i=0; i < this.ships.length; i++){
             if(this.ships[i] == null){
                 this.ships[i] = ship;
@@ -61,7 +61,7 @@ var ShipManager = Class.extend({
             GameGlobals.gui.menu.renderSelected();
         }
         else if(this.pickMode){
-            this.pickMode= false;
+            this.pickMode = false;
         }
         else{
             GameGlobals.gui.menu.clean();
